@@ -2,11 +2,6 @@
 import AnimatedButton from '@/components/animated/button';
 import { motion } from 'framer-motion';
 
-export const metadata = {
-  title: "Ekstrakulikuler Coding",
-  description: "Tempat mengubah imajinasi, Menjadi kenyataan"
-}
-
 const containerVariants = {
   hidden: { opacity: 0, scale: 0.95 },
   visible: {

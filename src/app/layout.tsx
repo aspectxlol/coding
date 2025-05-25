@@ -6,6 +6,11 @@ const pressStart = Press_Start_2P({
   subsets: ["latin"],
 })
 
+export const metadata = {
+  title: "Ekstrakulikuler Coding",
+  description: "Tempat mengubah imajinasi, Menjadi kenyataan"
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">

@@ -1,6 +1,6 @@
 'use client';
+import AnimatedButton from '@/components/animated/button';
 import { motion } from 'framer-motion';
-import MapButton from '@/components/MapButton';
 
 const containerVariants = {
   hidden: { opacity: 0, scale: 0.95 },
@@ -22,45 +22,35 @@ const itemVariants = {
 export default function Home() {
   return (
     <motion.div
-      className="flex flex-col items-center gap-10"
+      className="flex flex-col items-center gap-10 w-full h-full justify-center"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
     >
       <motion.h1
-        className="text-3xl md:text-5xl font-bold text-center"
+        className="text-9xl md:text-5xl font-bold text-center"
         variants={itemVariants}
       >
-        Ekskul Coding - Petualangan Interaktif
+        Coding
       </motion.h1>
 
       <motion.p
-        className="text-center max-w-xl"
+        className="text-center text-4xl"
         variants={itemVariants}
       >
-        Jelajahi dunia coding sekolahmu melalui map interaktif dan temukan dunia baru dari dunia pemrograman!
+        Let Your Imaginations Become Realities  
       </motion.p>
+      <AnimatedButton
+        buttonProps={{
+          className: "text-5xl h-fit p-4 px-10",
+          variant: "default"
+        }}
+        motionProps={{
 
-      <motion.div
-        className="grid grid-cols-2 md:grid-cols-3 gap-6"
-        variants={itemVariants}
+        }}
       >
-        <MapButton title="Apa itu Ekskul Coding" />
-        <MapButton title="Bahasa & Tools" />
-        <MapButton title="Hasil Karya" />
-        <MapButton title="Kompetisi" />
-        <MapButton title="Kolaborasi" />
-        <MapButton title="Keuntungan" />
-      </motion.div>
-
-      <motion.div
-        className="mt-10 p-4 bg-gray-800 rounded-xl shadow-md"
-        variants={itemVariants}
-      >
-        <p className="text-center text-sm">
-          💡 Tips: Klik setiap tombol untuk menjelajahi dunia coding-mu! Animasi dan kejutan menunggu!
-        </p>
-      </motion.div>
+        Play
+      </AnimatedButton>
     </motion.div>
   );
 }

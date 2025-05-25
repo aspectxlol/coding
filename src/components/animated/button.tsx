@@ -11,8 +11,6 @@ export default function AnimatedButton({
   return (
     //@ts-ignore
     <motion.div
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.95 }}
       style={{ display: "inline-block" }}
       {...motionProps}
     >

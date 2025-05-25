@@ -7,7 +7,7 @@ const pressStart = Press_Start_2P({
 })
 
 export const metadata = {
-  title: "Ekstrakulikuler Coding",
+  title: "Coding",
   description: "Tempat mengubah imajinasi, Menjadi kenyataan"
 }
 

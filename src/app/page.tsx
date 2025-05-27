@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/8bit/dialog';
 import { Button } from '@/components/ui/8bit/button';
 import { Input } from '@/components/ui/8bit/input';
+import Link from 'next/link';
 
 const containerVariants = {
   hidden: { opacity: 0, scale: 0.95 },
@@ -153,12 +154,14 @@ export default function Home() {
                   Cancel
                 </Button>
               </DialogClose>
-              <Button
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                onClick={handleNameSubmit}
-              >
-                Submit
-              </Button>
+              <Link href="/1">
+                <Button
+                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                  onClick={handleNameSubmit}
+                >
+                  Submit
+                </Button>
+              </Link>
             </DialogFooter>
           </div>
         </DialogContent>

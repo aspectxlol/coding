@@ -3,6 +3,16 @@
 import { useEffect, useState } from 'react';
 import AnimatedButton from '@/components/animated/button';
 import { motion } from 'framer-motion';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+  DialogClose,
+} from '@/components/ui/8bit/dialog';
+import { Button } from '@/components/ui/8bit/button';
+import { Input } from '@/components/ui/8bit/input';
 
 const containerVariants = {
   hidden: { opacity: 0, scale: 0.95 },
@@ -23,12 +33,23 @@ const itemVariants = {
 
 export default function Home() {
   const [bgLoaded, setBgLoaded] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [playerName, setPlayerName] = useState('');
 
   useEffect(() => {
     const img = new Image();
     img.src = '/images/background.jpg'; // Path to your background image
     img.onload = () => setBgLoaded(true);
   }, []);
+
+  const handlePlayClick = () => {
+    setIsDialogOpen(true);
+  };
+
+  const handleNameSubmit = () => {
+    console.log(`Player's name: ${playerName}`);
+    setIsDialogOpen(false);
+  };
 
   if (!bgLoaded) {
     return (
@@ -87,6 +108,7 @@ export default function Home() {
             className:
               "text-xl sm:text-2xl md:text-3xl h-fit p-4 px-8 font-bold drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]",
             variant: "default",
+            onClick: handlePlayClick,
           }}
           motionProps={{
             initial: "hidden",
@@ -110,8 +132,37 @@ export default function Home() {
         >
           Play
         </AnimatedButton>
-
       </motion.div>
+
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className=''>Enter Your Name</DialogTitle>
+          </DialogHeader>
+          <div className="p-4">
+            <Input
+              type="text"
+              className=""
+              value={playerName}
+              onChange={(e) => setPlayerName(e.target.value)}
+              placeholder="Your name"
+            />
+            <DialogFooter className='flex justify-between mt-4 w-full gap-10'>
+              <DialogClose asChild>
+                <Button className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">
+                  Cancel
+                </Button>
+              </DialogClose>
+              <Button
+                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                onClick={handleNameSubmit}
+              >
+                Submit
+              </Button>
+            </DialogFooter>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

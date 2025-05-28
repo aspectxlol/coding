@@ -7,8 +7,6 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
-  DialogClose,
 } from '@/components/ui/8bit/dialog';
 import { Button } from '@/components/ui/8bit/button';
 import { Input } from '@/components/ui/8bit/input';

@@ -14,6 +14,7 @@ import {
 import { Button } from '@/components/ui/8bit/button';
 import { Input } from '@/components/ui/8bit/input';
 import Link from 'next/link';
+import { ClipLoader, PropagateLoader } from 'react-spinners';
 
 const containerVariants = {
   hidden: { opacity: 0, scale: 0.95 },
@@ -55,26 +56,10 @@ export default function Home() {
   if (!bgLoaded) {
     return (
       <div className="w-full h-screen flex items-center justify-center bg-black text-white">
-        <svg
-          className="animate-spin h-10 w-10 text-white"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <circle
-            className="opacity-25"
-            cx="12"
-            cy="12"
-            r="10"
-            stroke="currentColor"
-            strokeWidth="4"
-          />
-          <path
-            className="opacity-75"
-            fill="currentColor"
-            d="M4 12a8 8 0 018-8v8z"
-          />
-        </svg>
+        <PropagateLoader
+          color='white'
+          loading
+        />
       </div>
     );
   }
@@ -158,6 +143,7 @@ export default function Home() {
                 <Button
                   className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
                   onClick={handleNameSubmit}
+                  disabled={!playerName}
                 >
                   Submit
                 </Button>

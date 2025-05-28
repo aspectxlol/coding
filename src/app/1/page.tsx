@@ -28,6 +28,7 @@ export default function Chapter1() {
     <div className="relative w-full h-screen bg-gray-900 text-white flex flex-col items-center justify-center p-6">
       {!showExplanation ? (
         <Dialog
+          modal
           open={isDialogOpen}
           onOpenChange={(open) => {
             setIsDialogOpen(open);
@@ -51,6 +52,7 @@ export default function Chapter1() {
               <Button
                 className="px-4 py-2 mt-4 bg-green-500 text-white rounded hover:bg-green-600"
                 onClick={handleThoughtsSubmit}
+                disabled={!playerThoughts}
               >
                 Submit
               </Button>

@@ -15,6 +15,8 @@ import { Button } from '@/components/ui/8bit/button';
 import { Input } from '@/components/ui/8bit/input';
 import Link from 'next/link';
 import { ClipLoader, PropagateLoader } from 'react-spinners';
+import { Router } from 'next/router';
+import { redirect } from 'next/navigation';
 
 const containerVariants = {
   hidden: { opacity: 0, scale: 0.95 },
@@ -51,6 +53,7 @@ export default function Home() {
   const handleNameSubmit = () => {
     console.log(`Player's name: ${playerName}`);
     setIsDialogOpen(false);
+    redirect('/1')
   };
 
   if (!bgLoaded) {
@@ -139,15 +142,13 @@ export default function Home() {
                   Cancel
                 </Button>
               </DialogClose>
-              <Link href="/1">
-                <Button
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                  onClick={handleNameSubmit}
-                  disabled={!playerName}
-                >
-                  Submit
-                </Button>
-              </Link>
+              <Button
+                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                onClick={handleNameSubmit}
+                disabled={!playerName}
+              >
+                Submit
+              </Button>
             </DialogFooter>
           </div>
         </DialogContent>

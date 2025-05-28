@@ -148,9 +148,9 @@ export default function Home() {
               onChange={(e) => setPlayerName(e.target.value)}
               placeholder="Your name"
             />
-            <DialogFooter className='flex justify-between mt-4 w-full gap-10'>
+            <DialogFooter className='flex flex-row justify-between mt-5 w-full'>
               <DialogClose asChild>
-                <Button className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">
+                <Button className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 sm:mx-2">
                   Cancel
                 </Button>
               </DialogClose>

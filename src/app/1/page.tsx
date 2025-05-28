@@ -13,7 +13,6 @@ import {
 import { Button } from '@/components/ui/8bit/button';
 import { Input } from '@/components/ui/8bit/input';
 import AnimatedButton from '@/components/animated/button';
-import { Textarea } from '@/components/ui/8bit/textarea';
 
 export default function Chapter1() {
   const [isDialogOpen, setIsDialogOpen] = useState(true); // Open dialog on page load

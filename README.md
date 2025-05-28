@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 8Bit Coding Adventure
 
-## Getting Started
+A retro-inspired, 8-bit styled interactive web experience about coding, created by a passionate team for a school project.
 
-First, run the development server:
+## What is this?
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This project is an interactive web app that gamifies the journey of learning and reflecting on coding. Users are greeted with animated 8-bit visuals, can enter their name, answer questions, and progress through chapters, all while enjoying a nostalgic pixel-art atmosphere.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Next.js** (App Router)
+- **React** (Functional Components, Hooks)
+- **Tailwind CSS** (Styling)
+- **Framer Motion** (Animations)
+- **Custom 8-bit UI Components** (Buttons, Dialogs, Inputs)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Team Members
 
-## Learn More
+- **You** (Louie Hansen)  
+  Project lead, developer.
+- **Calvin**  
+  Developer and UI/UX designer.
+- **Yesaya**  
+  content creator.
+- **Marcel**  
+  Material Designer
+- **Pavel**  
+  Artists
+## TODO
 
-To learn more about Next.js, take a look at the following resources:
+- [ ] Add more chapters and interactive questions
+- [ ] Implement animated 8-bit backgrounds for all pages
+- [ ] Improve mobile responsiveness and accessibility
+- [ ] Add sound effects and background music
+- [ ] Polish About Us page with more 8-bit flair
+- [ ] Add persistent progress tracking (localStorage/session)
+- [ ] Refactor code for scalability and maintainability
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Made with ❤️ by the 8Bit Coding Adventure Team.

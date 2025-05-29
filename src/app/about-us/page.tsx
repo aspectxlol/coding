@@ -1,11 +1,12 @@
 import React from 'react';
 
 const teamMembers = [
-  { name: 'Louie Hansen', img: '/images/team/you.png' },
-  { name: 'Calvin Emmanuel', img: '/images/team/calvin.png' },
-  { name: 'Yesaya Nathanael', img: '/images/team/yesaya.png' },
-  { name: 'Marcellino Gunawan', img: '/images/team/marcel.png' },
-  { name: 'Vincentius Pavel', img: '/images/team/pavel.png' },
+  { name: 'Bu Ester', img: '/images/team/Ester.png' },
+  { name: 'Louie', img: '/images/team/Louie.png' },
+  { name: 'Calvin', img: '/images/team/calvin.png' },
+  { name: 'Yesaya', img: '/images/team/yesaya.png' },
+  { name: 'Marcell', img: '/images/team/marcel.png' },
+  { name: 'Pavel', img: '/images/team/pavel.png' },
 ];
 
 export default function AboutUs() {

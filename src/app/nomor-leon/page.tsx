@@ -13,7 +13,7 @@ const getTodayNumber = () => {
 };
 
 export const metadata = {
-  title: "Hi Leon, Hari ini nomor lu X",
+  title: "Hi Leon, Hari ini nomor lu" + getTodayNumber(),
   description: "suatu hari lu bakal tau",
 };
 

@@ -1,25 +1,23 @@
 import React from "react";
+import type { Metadata } from "next";
 
+function getRandomNumber() {
+  const min = 16;
+  const max = 20;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
-export const metadata = {
-  title: "Hi Leon, Hari ini nomor lu adalah " + getTodayNumber(),
-  description: "suatu hari lu bakal tau",
-};
+// This function will run on every request and set the metadata dynamically
+export async function generateMetadata(): Promise<Metadata> {
+  const number = getRandomNumber();
+  return {
+    title: `Hi Leon, Hari ini nomor lu adalah ${number}`,
+    description: "suatu hari lu bakal tau",
+  };
+}
 
 export default function Page() {
-  const getTodayNumber = () => {
-    // Range: 16 - 20 (inclusive)
-    const min = 16;
-    const max = 20;
-    // Use the date as a seed to get a deterministic number per day
-    const today = new Date();
-    const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
-    // Simple deterministic "random" function
-    const number = ((seed * 9301 + 49297) % 233280) / 233280;
-    return min + Math.floor(number * (max - min + 1));
-  };
-
-  const todayNumber = getTodayNumber();
+  const todayNumber = getRandomNumber();
 
   return (
     <main className="min-h-screen bg-[#222] text-white flex flex-col items-center justify-center font-['Press_Start_2P','VT323','Courier_New',monospace] tracking-wider">

@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/8bit/button';
 import { Input } from '@/components/ui/8bit/input';
 import AnimatedButton from '@/components/animated/button';
 
-const ROLLING_WORDS = ['Programmer', 'Codigners', 'Bwinners'];
+const ROLLING_WORDS = ['Programmer', 'Innovator', 'Problem Solver', 'Creator', 'Learner', 'StackOverflow Visitor',];
 
 function RollingText() {
   const [index, setIndex] = useState(0);
@@ -20,7 +20,7 @@ function RollingText() {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % ROLLING_WORDS.length);
-    }, 1800);
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 
@@ -28,10 +28,10 @@ function RollingText() {
     <span
       style={{
         display: 'inline-block',
-        minWidth: '10ch',
         position: 'relative',
         userSelect: 'none',
         verticalAlign: 'middle',
+        transition: 'width 0.3s',
       }}
     >
       <AnimatePresence mode="wait">
@@ -43,20 +43,13 @@ function RollingText() {
           transition={{ duration: 0.4 }}
           style={{
             display: 'inline-block',
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            width: '100%',
             textAlign: 'center',
+            whiteSpace: 'nowrap',
           }}
         >
           {ROLLING_WORDS[index]}
         </motion.span>
       </AnimatePresence>
-      {/* This invisible span keeps the container width stable */}
-      <span style={{ opacity: 0, pointerEvents: 'none' }}>
-        {ROLLING_WORDS.reduce((a, b) => (a.length > b.length ? a : b))}
-      </span>
     </span>
   );
 }

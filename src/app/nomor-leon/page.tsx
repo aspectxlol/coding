@@ -1,16 +1,5 @@
 import React from "react";
 
-const getTodayNumber = () => {
-  // Range: 16 - 20 (inclusive)
-  const min = 16;
-  const max = 20;
-  // Use the date as a seed to get a deterministic number per day
-  const today = new Date();
-  const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
-  // Simple deterministic "random" function
-  const number = ((seed * 9301 + 49297) % 233280) / 233280;
-  return min + Math.floor(number * (max - min + 1));
-};
 
 export const metadata = {
   title: "Hi Leon, Hari ini nomor lu adalah " + getTodayNumber(),
@@ -18,6 +7,18 @@ export const metadata = {
 };
 
 export default function Page() {
+  const getTodayNumber = () => {
+    // Range: 16 - 20 (inclusive)
+    const min = 16;
+    const max = 20;
+    // Use the date as a seed to get a deterministic number per day
+    const today = new Date();
+    const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    // Simple deterministic "random" function
+    const number = ((seed * 9301 + 49297) % 233280) / 233280;
+    return min + Math.floor(number * (max - min + 1));
+  };
+
   const todayNumber = getTodayNumber();
 
   return (

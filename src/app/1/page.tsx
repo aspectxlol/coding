@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Dialog,
   DialogContent,
@@ -12,14 +12,51 @@ import { Button } from '@/components/ui/8bit/button';
 import { Input } from '@/components/ui/8bit/input';
 import AnimatedButton from '@/components/animated/button';
 
+// Animated hover text component
+function HoverText() {
+  const [active, setActive] = useState(false);
+
+  const handleToggle = () => setActive((prev) => !prev);
+
+  return (
+    <span
+      onMouseEnter={() => setActive(true)}
+      onMouseLeave={() => setActive(false)}
+      onClick={handleToggle}
+      style={{
+        display: 'inline-block',
+        minWidth: '8ch',
+        cursor: 'pointer',
+        userSelect: 'none',
+      }}
+    >
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={active ? 'codigners' : 'programmer'}
+          initial={{ opacity: 0, y: active ? 10 : -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: active ? -10 : 10 }}
+          transition={{ duration: 0.3 }}
+          style={{
+            display: 'inline-block',
+          }}
+        >
+          {active ? 'Codigners' : 'Programmer'}
+        </motion.span>
+      </AnimatePresence>
+    </span>
+  );
+}
+
+
 export default function Chapter1() {
-  const [isDialogOpen, setIsDialogOpen] = useState(true); // Open dialog on page load
+  const [isDialogOpen, setIsDialogOpen] = useState(true);
   const [playerThoughts, setPlayerThoughts] = useState('');
   const [showExplanation, setShowExplanation] = useState(false);
 
   const handleThoughtsSubmit = () => {
     setShowExplanation(true);
-    setIsDialogOpen(false); // Close the dialog after submission
+    setIsDialogOpen(false);
   };
 
   return (
@@ -65,7 +102,7 @@ export default function Chapter1() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            WOI MARCELL
+              Coding
           </motion.h1>
 
           <motion.p
@@ -74,7 +111,9 @@ export default function Chapter1() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-          dkk, ini tugas lu bjir, jelaskan arti ekstra coding
+              Coding itu sebuah aktivitas, dimana kita{' '}
+              (<HoverText />)
+              {' '}memberikan instruksi kepada komputer untuk melakukan sesuatu
           </motion.p>
           <AnimatedButton
             buttonProps={{

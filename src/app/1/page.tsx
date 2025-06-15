@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Dialog,
@@ -12,42 +12,54 @@ import { Button } from '@/components/ui/8bit/button';
 import { Input } from '@/components/ui/8bit/input';
 import AnimatedButton from '@/components/animated/button';
 
-// Animated hover text component
-function HoverText() {
-  const [active, setActive] = useState(false);
+const ROLLING_WORDS = ['Programmer', 'Codigners', 'Bwinners'];
 
-  const handleToggle = () => setActive((prev) => !prev);
+function RollingText() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % ROLLING_WORDS.length);
+    }, 1800);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <span
-      onMouseEnter={() => setActive(true)}
-      onMouseLeave={() => setActive(false)}
-      onClick={handleToggle}
       style={{
         display: 'inline-block',
-        minWidth: '8ch',
-        cursor: 'pointer',
+        minWidth: '10ch',
+        position: 'relative',
         userSelect: 'none',
+        verticalAlign: 'middle',
       }}
     >
       <AnimatePresence mode="wait">
         <motion.span
-          key={active ? 'codigners' : 'programmer'}
-          initial={{ opacity: 0, y: active ? 10 : -10 }}
+          key={ROLLING_WORDS[index]}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: active ? -10 : 10 }}
-          transition={{ duration: 0.3 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.4 }}
           style={{
             display: 'inline-block',
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            width: '100%',
+            textAlign: 'center',
           }}
         >
-          {active ? 'Codigners' : 'Programmer'}
+          {ROLLING_WORDS[index]}
         </motion.span>
       </AnimatePresence>
+      {/* This invisible span keeps the container width stable */}
+      <span style={{ opacity: 0, pointerEvents: 'none' }}>
+        {ROLLING_WORDS.reduce((a, b) => (a.length > b.length ? a : b))}
+      </span>
     </span>
   );
 }
-
 
 export default function Chapter1() {
   const [isDialogOpen, setIsDialogOpen] = useState(true);
@@ -110,10 +122,11 @@ export default function Chapter1() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
+              style={{ position: 'relative', display: 'inline-block' }}
           >
-              Coding itu sebuah aktivitas, dimana kita{' '}
-              (<HoverText />)
-              {' '}memberikan instruksi kepada komputer untuk melakukan sesuatu
+              Coding itu sebuah aktivitas, dimana kita
+              (<RollingText />)
+              memberikan instruksi kepada komputer untuk melakukan sesuatu
           </motion.p>
           <AnimatedButton
             buttonProps={{

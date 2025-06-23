@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button"; // shadcn/ui button
 import { cn } from "@/lib/utils"; // shadcn utility for className merge
+import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const correct_options = [
   'MIT AppInventor',
@@ -44,9 +46,11 @@ function shuffle<T>(array: T[]): T[] {
 }
 
 export default function Page() {
+  const router = useRouter();
   const [questionIdx, setQuestionIdx] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
   const [showResult, setShowResult] = useState(false);
+  const [showCongrats, setShowCongrats] = useState(false);
   const [optionsData, setOptionsData] = useState<string[] | null>(null);
 
   // Generate options on mount and when questionIdx changes (client only)
@@ -56,6 +60,7 @@ export default function Page() {
     setOptionsData(shuffle([correct, ...incorrects]));
     setSelected(null);
     setShowResult(false);
+    setShowCongrats(false);
   }, [questionIdx]);
 
   // Find correct answer for current options
@@ -64,13 +69,16 @@ export default function Page() {
   const handleSelect = (idx: number) => {
     setSelected(idx);
     setShowResult(true);
-    setTimeout(() => {
-      setQuestionIdx((q) => q + 1);
-    }, 1200);
+    if (optionsData && optionsData[idx] === correct) {
+      setTimeout(() => setShowCongrats(true), 400); // show animation
+      // Do not auto-advance!
+    } else {
+      setTimeout(() => setQuestionIdx((q) => q + 1), 1200);
+    }
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-neutral-900">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-neutral-900 relative overflow-hidden">
       <h1 className="font-8bit text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-8 text-white text-center">
         Coba tebak apa yang kita bakal pelajarin di ekskul coding?
       </h1>
@@ -94,7 +102,39 @@ export default function Page() {
             </Button>
           ))}
       </div>
-      {showResult && (
+      {/* Correct answer animation */}
+      <AnimatePresence>
+        {showCongrats && (
+          <motion.div
+            initial={{ y: 400, opacity: 0, scale: 0.7 }}
+            animate={{ y: 0, opacity: 1, scale: 1 }}
+            exit={{ y: -200, opacity: 0, scale: 0.7 }}
+            transition={{ type: "spring", stiffness: 200, damping: 18 }}
+            className="fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 bg-white rounded-2xl shadow-2xl px-8 py-10 flex flex-col items-center"
+          >
+            <div className="font-8bit text-2xl md:text-3xl text-black mb-4 text-center">
+              kita bakal belajar
+            </div>
+            <ul className="space-y-2 mt-2 mb-6">
+              {correct_options.map((item) => (
+                <li
+                  key={item}
+                  className="font-8bit text-lg md:text-xl text-center text-neutral-800 bg-yellow-100 rounded-lg px-4 py-2"
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <button
+              className="bg-yellow-300 text-black font-8bit font-bold rounded-lg px-8 py-3 text-xl hover:bg-yellow-400 transition"
+              onClick={() => router.push("/next-page")}
+            >
+              Next
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      {showResult && !showCongrats && (
         <div className="mt-8 font-8bit text-xl sm:text-2xl md:text-3xl text-white">
           {optionsData && optionsData[selected!] === correct ? "Benar! 🎉" : "Salah! 😅"}
         </div>

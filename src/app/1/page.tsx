@@ -80,7 +80,7 @@ export default function Chapter1() {
         >
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Apa arti Coding bagimu?</DialogTitle>
+              <DialogTitle className={'text-center'}>Kalau denger ‘ngoding’, yang kepikiran pertama apa?</DialogTitle>
             </DialogHeader>
             <div className="p-4 gap-2">
               <Input

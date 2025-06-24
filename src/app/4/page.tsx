@@ -1,12 +1,17 @@
 "use client"
-
+import { RetroRenderer } from '@/lib/blockly/retro';
 import React, { useRef, useEffect, useState } from "react";
 import * as Blockly from "blockly";
 import { Xml } from "blockly";
 import { javascriptGenerator } from "blockly/javascript";
 import { useRouter } from "next/navigation";
+import { Box } from "@/components/ui/8bit/box";
+import { Button } from "@/components/ui/8bit/button";
 
-export default function App() {
+// Register ONCE, outside the component
+Blockly.blockRendering.register('retro', RetroRenderer);
+
+export default function Chapter4() {
   const router = useRouter();
   const blocklyDiv = useRef<HTMLDivElement>(null);
   const workspaceRef = useRef<Blockly.WorkspaceSvg | null>(null);
@@ -88,24 +93,24 @@ export default function App() {
       // Inject Blockly
       workspaceRef.current = Blockly.inject(blocklyDiv.current, {
         toolbox,
+        renderer: "retro", // use your custom renderer
         grid: {
           spacing: 20,
           length: 3,
           colour: "#ccc",
           snap: true,
         },
-        renderer: "zelos",
         theme: Blockly.Themes.Classic,
       });
 
       // Preload the workspace with the goal: print "coding is cool"
       const xmlText = `
         <xml xmlns="https://developers.google.com/blockly/xml">
-          <block type="text_print" x="50" y="50">
+          <block type="text_print" x="300" y="300">
             <value name="TEXT">
             </value>
           </block>
-          <block type="text">
+          <block type="text" x="350" y="350">
             <field name="TEXT">coding is cool</field>
           </block>
         </xml>
@@ -146,26 +151,27 @@ export default function App() {
   const isGoalMet = output.trim() === "coding is cool";
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-neutral-100 w-full">
-      <div
-        ref={blocklyDiv}
-        style={{
-          width: "100vw",
-          height: "60vh",
-          background: "#222",
-          borderRadius: 12,
-          marginBottom: 16,
-        }}
-      />
-      <button
+    <div className="flex flex-col items-center justify-center min-h-screen bg-neutral-100">
+      <Box>
+        <div
+          ref={blocklyDiv}
+          style={{
+            width: "90vw",
+            height: "40vh",
+            background: "#222",
+            borderRadius: 12,
+            marginBottom: 16,
+          }}
+        />
+      </Box>
+      <Button
         className="bg-blue-600 text-white font-bold rounded-lg px-8 py-2 text-lg hover:bg-blue-700 transition mb-4"
         onClick={runCode}
       >
         Run
-      </button>
-      <div className="w-full max-w-2xl bg-green-100 rounded-lg p-4 mb-4 font-mono text-black min-h-[48px]">
-        <span className="font-bold">Output:</span>
-        <pre className="whitespace-pre-wrap break-words">{output}</pre>
+      </Button>
+      <div className="w-full max-w-2xl rounded-lg p-4 mb-4 font-mono text-black min-h-[48px]">
+        <Box className="font-bold">Output: {output}</Box>
       </div>
       {isGoalMet && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/40">
@@ -173,25 +179,13 @@ export default function App() {
             <div className="font-bold text-2xl mb-4 text-center text-black">Great job! 🎉</div>
             <button
               className="bg-yellow-300 text-black font-bold rounded-lg px-8 py-3 text-xl hover:bg-yellow-400 transition"
-              onClick={() => router.push("/next-page")}
+              onClick={() => router.push("/5")}
             >
               Next
             </button>
           </div>
         </div>
       )}
-      <div className="w-full max-w-2xl">
-        <textarea
-          style={{ width: "100%", height: 120 }}
-          value={code}
-          readOnly
-          className="rounded-lg border border-gray-300 p-2 font-mono"
-        />
-      </div>
-      <div className="mt-4 text-center text-black font-mono">
-        <div className="text-lg font-bold">Goal: Print <span className="bg-yellow-200 px-2 rounded">coding is cool</span></div>
-        <div className="text-sm text-gray-600">Drag the text block into the print block and press Run!</div>
-      </div>
     </div>
   );
 }

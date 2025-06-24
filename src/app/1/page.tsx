@@ -11,6 +11,7 @@ import {
 import { Button } from '@/components/ui/8bit/button';
 import { Input } from '@/components/ui/8bit/input';
 import AnimatedButton from '@/components/animated/button';
+import Router, { useRouter } from 'next/navigation';
 
 const ROLLING_WORDS = ['Programmer', 'Innovator', 'Problem Solver', 'Creator', 'Learner', 'StackOverflow Visitor',];
 
@@ -58,6 +59,7 @@ export default function Chapter1() {
   const [isDialogOpen, setIsDialogOpen] = useState(true);
   const [playerThoughts, setPlayerThoughts] = useState('');
   const [showExplanation, setShowExplanation] = useState(false);
+  const router = useRouter();
 
   const handleThoughtsSubmit = () => {
     setShowExplanation(true);
@@ -127,8 +129,7 @@ export default function Chapter1() {
                 'text-xl sm:text-2xl md:text-3xl h-fit p-4 px-8 font-bold drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)] bg-blue-500 text-white rounded hover:bg-blue-600',
               variant: 'default',
               onClick: () => {
-                // Handle next action here
-                console.log('Next button clicked');
+                router.push("/2");
               },
             }}
             motionProps={{

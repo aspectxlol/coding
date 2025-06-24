@@ -2,6 +2,9 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/8bit/button';
+import { Box } from '@/components/ui/8bit/box';
 // import confetti from 'canvas-confetti';
 
 const teachers = [
@@ -31,6 +34,7 @@ export default function Page() {
 
   // The winner should be in the center (index 1 of visible 3)
   const winnerGlobalIndex = teachers.length * 2 + winnerIndex; // 2nd repetition, winnerIndex
+  const router = useRouter();
 
   const getTargetX = () => {
     const centerIndex = Math.floor(visibleCards / 2);
@@ -73,7 +77,7 @@ export default function Page() {
             className="flex items-center absolute"
           >
             {carousel.map((name, i) => (
-              <div
+              <Box
                 key={i + name}
                 className="bg-gray-100 border-2 border-gray-300 rounded-xl flex items-center justify-center font-mono text-2xl font-semibold shadow-lg mx-1 transition-all duration-200"
                 style={{
@@ -84,7 +88,7 @@ export default function Page() {
                 }}
               >
                 {name}
-              </div>
+              </Box>
             ))}
           </motion.div>
           {/* Center highlight removed */}
@@ -98,27 +102,29 @@ export default function Page() {
           className="w-[340px] bg-gray-200 rounded-2xl p-8 flex flex-col items-center shadow-2xl"
         >
           <img
-            src="https://via.placeholder.com/200x140.png?text=Foto+Bu+Ester"
+              src="/images/bu-ester.jpg"
             alt="Bu Ester"
-            className="w-[200px] h-[140px] object-cover rounded-xl bg-white mb-6"
+              className="w-[200px] h-[140px] object-cover object-top rounded-xl bg-white mb-6"
           />
           <div className="font-bold text-3xl mb-6 text-black">Bu Ester</div>
-          <button
+            <Button
             className="bg-yellow-300 text-black font-bold rounded-lg px-8 py-3 text-xl hover:bg-yellow-400 transition"
-            onClick={() => alert('Next!')}
+              onClick={() =>
+                router.push('/3')
+              }
           >
             Next
-          </button>
+            </Button>
         </motion.div>
       )}
       {!revealed && (
-        <button
+        <Button
           onClick={rollCards}
           disabled={rolling}
           className="mt-10 px-10 py-4 text-3xl font-mono font-bold rounded-xl bg-neutral-800 text-white hover:bg-neutral-700 transition disabled:opacity-60"
         >
           {rolling ? 'Rolling...' : 'Roll the Cards!'}
-        </button>
+        </Button>
       )}
     </div>
   );

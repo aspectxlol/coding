@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Button } from "@/components/ui/button"; // shadcn/ui button
+import { Button } from "@/components/ui/8bit/button"; // shadcn/ui button
 import { cn } from "@/lib/utils"; // shadcn utility for className merge
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
@@ -125,12 +125,12 @@ export default function Page() {
                 </li>
               ))}
             </ul>
-            <button
+            <Button
               className="bg-yellow-300 text-black font-8bit font-bold rounded-lg px-8 py-3 text-xl hover:bg-yellow-400 transition"
-              onClick={() => router.push("/next-page")}
+              onClick={() => router.push("/4")}
             >
               Next
-            </button>
+            </Button>
           </motion.div>
         )}
       </AnimatePresence>

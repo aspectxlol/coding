@@ -198,3 +198,35 @@
     @apply bg-background text-foreground;
   }
 }
+
+.blocklySvg {
+  @apply backdrop-blur-sm
+}
+
+.blocklyMainBackground {
+  stroke: none !important;
+  fill: transparent !important;
+}
+
+.blocklyText {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+}
+
+.blocklyToolbox {
+  background-color: transparent !important;
+  @apply border-r-2 border-black;
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.397); /* normal soft shadow to the right */
+}
+
+.blocklyToolbox:empty {
+  display: none !important;
+}
+
+.blocklyTreeRow {
+  background-color: transparent !important;
+}
+
+.blocklyTreeRowContentContainer {
+  background-color: transparent !important;
+}

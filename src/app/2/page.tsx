@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/8bit/button';
 import { Box } from '@/components/ui/8bit/box';
-// import confetti from 'canvas-confetti';
 
 const teachers = [
   "Mr. Alan Turing",
@@ -26,14 +25,14 @@ export default function Page() {
   const [revealed, setRevealed] = useState(false);
   const [carousel, setCarousel] = useState([...teachers, ...teachers, ...teachers]);
 
-  // Card and container sizes (bigger now)
-  const cardWidth = 160;
-  const cardHeight = 140;
+  // Responsive card sizes
+  const cardWidth = 110;
+  const cardHeight = 70;
   const cardMargin = 4;
   const visibleCards = 3;
 
   // The winner should be in the center (index 1 of visible 3)
-  const winnerGlobalIndex = teachers.length * 2 + winnerIndex; // 2nd repetition, winnerIndex
+  const winnerGlobalIndex = teachers.length * 2 + winnerIndex;
   const router = useRouter();
 
   const getTargetX = () => {
@@ -49,21 +48,16 @@ export default function Page() {
       setRolling(false);
       setRevealed(true);
       setCarousel([teachers[winnerIndex]]);
-      // confetti({
-      //   particleCount: 120,
-      //   spread: 70,
-      //   origin: { y: 0.6 }
-      // });
     }, 2200);
 
     setCarousel([...teachers, ...teachers, ...teachers]);
   };
 
   return (
-    <div className="flex flex-col items-center mt-16">
-      <h1 className="font-bold text-white text-5xl mb-6">Pembina Ekskul</h1>
+    <div className="flex flex-col items-center mt-8 px-2 w-full">
+      <h1 className="font-bold text-white text-2xl sm:text-4xl md:text-5xl mb-4 sm:mb-6 text-center">Pembina Ekskul</h1>
       {!revealed ? (
-        <div className="relative w-[540px] h-[160px] overflow-hidden my-10">
+        <div className="relative w-full max-w-[540px] h-[90px] sm:h-[120px] md:h-[160px] overflow-hidden my-4 sm:my-8">
           <motion.div
             key={rolling ? 'rolling' : 'stopped'}
             initial={{ x: 0 }}
@@ -74,12 +68,12 @@ export default function Page() {
               duration: rolling ? 2 : 0.3,
               ease: rolling ? [0.22, 1, 0.36, 1] : 'easeOut'
             }}
-            className="flex items-center absolute"
+            className="flex items-center absolute left-0 top-0 h-full w-full"
           >
             {carousel.map((name, i) => (
               <Box
                 key={i + name}
-                className="bg-gray-100 border-2 border-gray-300 rounded-xl flex items-center justify-center font-mono text-2xl font-semibold shadow-lg mx-1 transition-all duration-200"
+                className="bg-gray-100 border-2 border-gray-300 rounded-xl flex items-center justify-center font-mono text-xs xs:text-sm sm:text-lg md:text-2xl font-semibold shadow-lg mx-1 transition-all duration-200"
                 style={{
                   width: cardWidth,
                   height: cardHeight,
@@ -91,7 +85,6 @@ export default function Page() {
               </Box>
             ))}
           </motion.div>
-          {/* Center highlight removed */}
         </div>
       ) : (
         // Final reveal card with pop-out animation
@@ -99,19 +92,17 @@ export default function Page() {
           initial={{ scale: 0.7, opacity: 0 }}
           animate={{ scale: 1.1, opacity: 1 }}
           transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          className="w-[340px] bg-gray-200 rounded-2xl p-8 flex flex-col items-center shadow-2xl"
+            className="w-full max-w-[340px] bg-gray-200 rounded-2xl p-4 sm:p-8 flex flex-col items-center shadow-2xl"
         >
           <img
               src="/images/bu-ester.jpg"
             alt="Bu Ester"
-              className="w-[200px] h-[140px] object-cover object-top rounded-xl bg-white mb-6"
+              className="w-[90px] h-[65px] sm:w-[160px] sm:h-[110px] md:w-[200px] md:h-[140px] object-cover object-top rounded-xl bg-white mb-4 sm:mb-6"
           />
-          <div className="font-bold text-3xl mb-6 text-black">Bu Ester</div>
+            <div className="font-bold text-lg sm:text-2xl md:text-3xl mb-4 sm:mb-6 text-black text-center">Bu Ester</div>
             <Button
-            className="bg-yellow-300 text-black font-bold rounded-lg px-8 py-3 text-xl hover:bg-yellow-400 transition"
-              onClick={() =>
-                router.push('/3')
-              }
+              className="bg-yellow-300 text-black font-bold rounded-lg px-6 py-2 sm:px-8 sm:py-3 text-base sm:text-xl hover:bg-yellow-400 transition"
+              onClick={() => router.push('/3')}
           >
             Next
             </Button>
@@ -121,7 +112,7 @@ export default function Page() {
         <Button
           onClick={rollCards}
           disabled={rolling}
-          className="mt-10 px-10 py-4 text-3xl font-mono font-bold rounded-xl bg-neutral-800 text-white hover:bg-neutral-700 transition disabled:opacity-60"
+          className="mt-8 px-4 py-2 sm:px-8 sm:py-3 text-base sm:text-2xl font-mono font-bold rounded-xl bg-neutral-800 text-white hover:bg-neutral-700 transition disabled:opacity-60"
         >
           {rolling ? 'Rolling...' : 'Roll the Cards!'}
         </Button>

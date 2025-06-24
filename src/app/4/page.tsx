@@ -106,11 +106,11 @@ export default function Chapter4() {
       // Preload the workspace with the goal: print "coding is cool"
       const xmlText = `
         <xml xmlns="https://developers.google.com/blockly/xml">
-          <block type="text_print" x="300" y="300">
+          <block type="text_print" x="20" y="20">
             <value name="TEXT">
             </value>
           </block>
-          <block type="text" x="350" y="350">
+          <block type="text" x="20" y="80">
             <field name="TEXT">coding is cool</field>
           </block>
         </xml>

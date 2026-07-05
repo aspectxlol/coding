@@ -16,7 +16,7 @@ This project is an interactive web app that gamifies the journey of learning and
 
 ## Team Members
 
-- **You** (Louie Hansen)  
+- **Louie Hansen**  
   Project lead, developer.
 - **Calvin**  
   Developer and UI/UX designer.

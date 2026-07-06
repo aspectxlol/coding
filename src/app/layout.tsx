@@ -1,6 +1,7 @@
 import { Press_Start_2P } from 'next/font/google';
 import './globals.css'
 import Navbar from '@/components/navbar';
+import { Analytics } from '@vercel/analytics/next';
 
 const pressStart = Press_Start_2P({
   weight: ["400"],
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className='min-h-screen flex flex-col justify-center'>
           {children}
         </main>
+        <Analytics />
       </body>
     </html>
   );

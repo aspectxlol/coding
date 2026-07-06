@@ -52,8 +52,8 @@ export default function Home() {
         <motion.div className="w-full max-w-[36rem] border-4 border-[#232323] bg-[#ff8fb1] px-5 py-4 shadow-[8px_8px_0_#232323] sm:px-6 sm:py-5 sm:shadow-[12px_12px_0_#232323]" variants={itemVariants}>
           <p className="text-center text-[10px] uppercase tracking-[0.35em] text-[#fffef8] sm:text-xs">Demo Game Retro</p>
           <h1 className="mx-auto mt-2 w-fit max-w-full text-center text-[1.35rem] font-black uppercase leading-[0.9] tracking-[0.04em] text-[#fffef8] sm:text-[2rem] md:text-[2.6rem] lg:text-[3rem]">
-            <span className="block">Petualangan</span>
-            <span className="mt-1 block sm:mt-2">Coding</span>
+            <span className="block">Coding</span>
+            <span className="mt-1 block sm:mt-2">Adventure</span>
           </h1>
         </motion.div>
 

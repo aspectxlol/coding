@@ -35,31 +35,31 @@ export default function StepOnePage() {
       <CodingAdventureFlow
         step={1}
         title="Langkah Pertama"
-        subtitle="Menurutmu, coding itu apa?"
-        description="Ceritakan namamu dan gagasan pertamamu tentang coding, lalu kami akan mengungkap arti sebenarnya di baliknya."
+        subtitle="Menurutmu, coding itu apa sih?"
+        description="Ceritakan namamu dan pendapatmu soal coding dulu, lalu kita bakal buka arti sebenarnya yang ternyata jauh lebih santai."
         nextRoute="/2"
-        primaryLabel="Ungkap kebenarannya"
+        primaryLabel="Buka kebenarannya"
         onPrimaryAction={() => setIsTruthOpen(true)}
       >
         <motion.div className="space-y-4 rounded-none border-4 border-[#232323] bg-[#fffef5] p-4">
-          <p className="text-sm uppercase tracking-[0.25em] text-cyan-300">Pemicu awal</p>
+          <p className="text-sm uppercase tracking-[0.25em] text-cyan-300">Awal cerita</p>
           {!submitted ? (
             <div className="space-y-4">
-              <Input value={name} onChange={(event) => setName(event.target.value)} placeholder="Namamu" />
+              <Input value={name} onChange={(event) => setName(event.target.value)} placeholder="Nama kamu" />
               <textarea
                 value={belief}
                 onChange={(event) => setBelief(event.target.value)}
                 className="min-h-24 w-full border-2 border-[#232323] bg-white p-3 text-sm text-[#172a2b] outline-none"
-                placeholder="Menurut aku Coding itu..."
+                placeholder="Menurut aku, coding itu..."
               />
               <Button font="retro" className="bg-cyan-500 text-slate-950" onClick={handleSubmit}>
-                Kirim jawaban
+                Kirim ya
               </Button>
             </div>
           ) : (
             <div className="rounded-none border-2 border-[#232323] bg-[#172a2b] p-4 text-sm leading-7 text-[#fef3c7] shadow-[4px_4px_0_#232323]">
-              <p className="text-xl font-black uppercase tracking-[0.2em] text-[#fffef8]">Selamat datang, {name}.</p>
-              <p className="mt-2 text-sm font-semibold text-[#ffe082]">Keyakinanmu: {belief}</p>
+              <p className="text-xl font-black uppercase tracking-[0.2em] text-[#fffef8]">Halo, {name}.</p>
+              <p className="mt-2 text-sm font-semibold text-[#ffe082]">Pendapatmu: {belief}</p>
             </div>
           )}
         </motion.div>
@@ -68,15 +68,15 @@ export default function StepOnePage() {
       <Dialog open={isTruthOpen} onOpenChange={setIsTruthOpen}>
         <DialogContent font="retro" className="border-4 border-[#232323] bg-[#fffef8] p-6 text-[#172a2b] sm:max-w-xl">
           <DialogHeader>
-            <DialogTitle className="text-xl uppercase tracking-[0.2em] text-[#172a2b]">Kebenarannya</DialogTitle>
+            <DialogTitle className="text-xl uppercase tracking-[0.2em] text-[#172a2b]">Sebenarnya</DialogTitle>
             <DialogDescription className="text-sm leading-7 text-[#172a2b]">
-              Coding sebenarnya adalah mengubah ide menjadi langkah-langkah yang jelas dan bisa diuji agar mesin bisa mengikuti. Ini adalah perpaduan logika, kreativitas, kesabaran, dan pemecahan masalah.
+              Coding sebenarnya itu ngubah ide jadi langkah-langkah yang jelas, lalu diuji sampai mesin bisa ngerti. Ini gabungan logika, kreativitas, sabar, dan skill nyelesain masalah.
             </DialogDescription>
           </DialogHeader>
 
           <div className="space-y-3 rounded-none border-2 border-[#232323] bg-[#f0f6ef] p-4 text-sm leading-7 text-[#172a2b]">
-            <p>Setiap baris kode adalah keputusan kecil yang membantu membentuk pengalaman yang lebih besar.</p>
-            <p>Terkadang keajaiban bukan ada di sintaksnya, melainkan di cara kamu memecah masalah menjadi bagian-bagian yang lebih kecil dan bisa diselesaikan.</p>
+            <p>Setiap baris kode itu kayak keputusan kecil yang bikin pengalaman besar.</p>
+            <p>Seringnya, keajaiban bukan ada di syntax-nya, tapi di cara kamu pecah masalah jadi bagian kecil yang lebih gampang ditangani.</p>
           </div>
 
           <div className="flex justify-end pt-2">
@@ -88,7 +88,7 @@ export default function StepOnePage() {
                 router.push('/2');
               }}
             >
-              Lanjut
+              Lanjut yuk
             </Button>
           </div>
         </DialogContent>

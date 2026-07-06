@@ -18,9 +18,9 @@ export default function StepFivePage() {
   return (
     <CodingAdventureFlow
       step={5}
-      title="Alat & Teknologi"
-      subtitle="Perangkat yang mendukung proyek"
-      description="Setiap karya kreatif memakai tumpukan teknologi yang kuat. Inilah alat yang membentuk demo coding ini."
+      title="Alat yang dipakai"
+      subtitle="Tools yang bikin project ini jalan"
+      description="Setiap karya keren biasanya dibantu sama tool yang pas. Ini beberapa alat yang dipakai buat demo coding ini."
       nextRoute="/6"
       prevRoute="/4"
       primaryLabel="Tampilkan pencapaian"

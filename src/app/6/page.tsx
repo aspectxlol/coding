@@ -7,8 +7,8 @@ export default function StepSixPage() {
     <CodingAdventureFlow
       step={6}
       title="Pencapaian"
-      subtitle="Kemenangan dari perjalanan coding"
-      description="Proyek ini sudah mendapat pengakuan, dan pencapaian itu berbicara tentang usaha di balik setiap baris kode."
+      subtitle="Hasil dari perjalanan coding"
+      description="Project ini udah dapet pengakuan, dan itu bukti ada usaha di balik tiap baris kode."
       nextRoute="/7"
       prevRoute="/5"
       primaryLabel="Buat sertifikat"
@@ -20,8 +20,8 @@ export default function StepSixPage() {
           <p className="text-sm text-slate-400">Louie Hansen & William Liem</p>
         </div>
         <div className="rounded-none border border-cyan-400/40 bg-cyan-500/10 p-4">
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-200">Pencapaian komunitas</p>
-          <p className="mt-2 text-sm leading-7 text-slate-300">Portofolio yang terus berkembang berisi demo yang rapi dan eksperimen coding yang kreatif.</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-200">Pencapaian bareng</p>
+          <p className="mt-2 text-sm leading-7 text-slate-300">Portofolio yang terus berkembang isinya demo yang rapi dan eksperimen coding yang seru.</p>
         </div>
       </div>
     </CodingAdventureFlow>

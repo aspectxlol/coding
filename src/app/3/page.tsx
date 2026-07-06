@@ -203,7 +203,7 @@ export default function StepThreePage() {
   const handleCheck = () => {
     if (!question) return;
     if (selected === question.options[question.correctIndex]) {
-      setFeedback('Benar! Kerja bagus — itu penjelasan yang tepat.');
+      setFeedback('Betul! Nice, itu jawaban yang tepat.');
       return;
     }
     setFeedback('Hampir — jawaban terbaik adalah yang menggambarkan coding sebagai instruksi untuk komputer.');
@@ -212,16 +212,16 @@ export default function StepThreePage() {
   return (
     <CodingAdventureFlow
       step={3}
-      title="Kuis Singkat"
-      subtitle="Tebak ide yang benar"
-      description="Esther menantangmu dengan teka-teki pilihan ganda kecil untuk menguji pemahamanmu tentang coding."
+      title="Kuis santai"
+      subtitle="Coba tebak ide yang paling pas"
+      description="Esther kasih tantangan kecil lewat pilihan jawaban, biar kamu lihat apakah konsep coding udah mulai masuk."
       nextRoute="/4"
       prevRoute="/2"
       primaryLabel="Masuk ke demo"
     >
       <div className="space-y-4 rounded-none border border-cyan-400/40 bg-slate-900/70 p-4">
         <p className="text-sm uppercase tracking-[0.25em] text-cyan-300">Pertanyaan</p>
-        <p className="text-lg font-semibold text-white">{question ? question.prompt : 'Memuat pertanyaan...'}</p>
+        <p className="text-lg font-semibold text-white">{question ? question.prompt : 'Nunggu pertanyaannya dulu ya...'}</p>
         <div className="space-y-2">
           {question && question.options.map((option) => (
             <button
@@ -234,7 +234,7 @@ export default function StepThreePage() {
           ))}
         </div>
         <Button font="retro" className="bg-cyan-500 text-slate-950" onClick={handleCheck}>
-          Periksa jawaban
+          Cek jawaban
         </Button>
         <p className="text-sm leading-7 text-slate-300">{feedback}</p>
       </div>

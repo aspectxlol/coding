@@ -58,7 +58,7 @@ export default function Home() {
 
         <motion.div className="max-w-2xl border-4 border-[#232323] bg-[#fffef8] p-4 shadow-[12px_12px_0_#232323]" variants={itemVariants}>
           <p className="text-center text-base text-[#172a2b] sm:text-lg md:text-2xl">
-            Mulai ceritanya, temui Esther Rouli, dan buka lencana coding pertamamu dalam misi retro yang cerah.
+            Mulai ceritanya, ketemu Esther Rouli, dan buka lencana coding pertama kamu di misi retro yang santai dan seru.
           </p>
         </motion.div>
 
@@ -83,7 +83,7 @@ export default function Home() {
             whileTap: { scale: 0.95 },
           }}
         >
-          Mulai Petualangan
+          Mulai sekarang
         </AnimatedButton>
       </motion.div>
     </div>

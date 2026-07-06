@@ -98,7 +98,7 @@ export default function StepSevenPage() {
     if (typeof navigator.share === 'function' && typeof navigator.canShare === 'function' && navigator.canShare({ files: [file] })) {
       await navigator.share({
         title: 'Sertifikat Petualangan Coding',
-        text: 'Lihat pencapaian codingku!',
+        text: 'Lihat Kawan! aku telah berhasil menyelesaikan misi Coding Adventure!',
         files: [file],
       });
       setShareLabel('Terkirim!');

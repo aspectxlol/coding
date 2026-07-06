@@ -49,11 +49,11 @@ export default function CodingAdventureFlow({
           <span>Misi {step}/7</span>
         </div>
 
-        <div className="grid gap-4 sm:gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
-          <div className="space-y-4 sm:space-y-6">{children}</div>
+        <div className="grid min-w-0 gap-4 sm:gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
+          <div className="min-w-0 space-y-4 sm:space-y-6">{children}</div>
 
           <motion.div
-            className="space-y-3 border-4 border-[#232323] bg-[#fffef8] p-4 shadow-[6px_6px_0_#232323] sm:space-y-4 sm:p-5 sm:shadow-[8px_8px_0_#232323]"
+            className="min-w-0 space-y-3 border-4 border-[#232323] bg-[#fffef8] p-4 shadow-[6px_6px_0_#232323] sm:space-y-4 sm:p-5 sm:shadow-[8px_8px_0_#232323]"
             initial={{ opacity: 0, x: 18 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.16 }}
@@ -86,7 +86,7 @@ export default function CodingAdventureFlow({
                   Kembali
                 </Button>
               )}
-              <Button font="retro" className="border-2 border-[#232323] bg-[#006d77] text-white" onClick={handlePrimaryAction}>
+              <Button font="retro" className="border-2 border-[#232323] bg-[#006d77] text-white flex text-wrap py-5" onClick={handlePrimaryAction}>
                 {primaryLabel}
               </Button>
               {secondaryLabel && (

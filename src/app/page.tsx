@@ -42,32 +42,33 @@ export default function Home() {
   }
 
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-[#f0f6ef]">
+    <div className="relative min-h-screen w-full overflow-x-hidden bg-[#f0f6ef]">
       <motion.div
-        className="mx-auto flex h-full w-full flex-col items-center justify-center gap-8 px-4"
+        className="mx-auto flex min-h-screen w-full max-w-6xl flex-col items-center justify-center gap-4 px-3 py-8 sm:gap-6 sm:px-4 sm:py-10 md:gap-8"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
       >
-        <motion.div className="border-4 border-[#232323] bg-[#ff8fb1] px-6 py-5 shadow-[12px_12px_0_#232323] sm:px-8" variants={itemVariants}>
-          <p className="text-center text-xs uppercase tracking-[0.35em] text-[#fffef8]">Demo Game Retro</p>
-          <h1 className="mt-2 text-center text-5xl font-black uppercase tracking-[0.2em] text-[#fffef8] sm:text-6xl md:text-7xl lg:text-8xl">
+        <motion.div className="w-full max-w-[min(100%,34rem)] border-4 border-[#232323] bg-[#ff8fb1] px-4 py-4 shadow-[8px_8px_0_#232323] sm:px-6 sm:py-5 sm:shadow-[12px_12px_0_#232323]" variants={itemVariants}>
+          <p className="text-center text-[10px] uppercase tracking-[0.35em] text-[#fffef8] sm:text-xs">Demo Game Retro</p>
+          <h1 className="mt-2 text-center text-2xl font-black uppercase leading-[1.05] tracking-[0.2em] text-[#fffef8] sm:text-3xl md:text-4xl lg:text-5xl">
             Petualangan Coding
           </h1>
         </motion.div>
 
-        <motion.div className="max-w-2xl border-4 border-[#232323] bg-[#fffef8] p-4 shadow-[12px_12px_0_#232323]" variants={itemVariants}>
-          <p className="text-center text-base text-[#172a2b] sm:text-lg md:text-2xl">
+        <motion.div className="w-full max-w-2xl border-4 border-[#232323] bg-[#fffef8] p-4 shadow-[8px_8px_0_#232323] sm:p-5 sm:shadow-[12px_12px_0_#232323]" variants={itemVariants}>
+          <p className="text-center text-sm leading-7 text-[#172a2b] sm:text-base md:text-lg">
             Mulai ceritanya, buka lencana coding pertama kamu, dan rasain misi retro yang santai dan seru.
           </p>
         </motion.div>
 
-        <AnimatedButton
-          buttonProps={{
-            className: 'text-xl sm:text-2xl md:text-3xl h-fit p-4 px-8 font-black uppercase tracking-[0.2em] border-4 border-[#232323] bg-[#006d77] text-white shadow-[12px_12px_0_#232323]',
-            variant: 'default',
-            onClick: () => router.push('/1'),
-          }}
+        <div className="flex w-full justify-center">
+          <AnimatedButton
+            buttonProps={{
+              className: 'w-full max-w-[16rem] sm:max-w-[18rem] text-base sm:text-lg md:text-xl h-fit px-4 py-3 sm:px-6 sm:py-4 font-black uppercase tracking-[0.12em] leading-tight border-4 border-[#232323] bg-[#006d77] text-white shadow-[8px_8px_0_#232323] sm:shadow-[12px_12px_0_#232323]',
+              variant: 'default',
+              onClick: () => router.push('/1'),
+            }}
           motionProps={{
             initial: 'hidden',
             animate: 'visible',
@@ -82,9 +83,10 @@ export default function Home() {
             whileHover: { scale: 1.05 },
             whileTap: { scale: 0.95 },
           }}
-        >
-          Mulai sekarang
-        </AnimatedButton>
+          >
+            Mulai sekarang
+          </AnimatedButton>
+        </div>
       </motion.div>
     </div>
   );

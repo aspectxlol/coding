@@ -12,7 +12,7 @@ export default function StepFourPage() {
       prevRoute="/3"
       primaryLabel="Buka kotak alat teknologi"
     >
-      <div className="rounded-none border border-cyan-400/40 bg-slate-900/70 p-4">
+      <div className="w-full min-w-0 overflow-hidden rounded-none border border-cyan-400/40 bg-slate-900/70 p-3 sm:p-4">
         <p className="mb-3 text-sm uppercase tracking-[0.25em] text-cyan-300">Misi: buka pintu rahasia</p>
         <p className="mb-4 text-sm leading-7 text-slate-200">
           Bayangin kamu lagi buka kunci digital. Kalau kondisi benar, program harus ngeprint pesan rahasia supaya pintu terbuka. Kalau salah, tampilkan pesan lain.

@@ -50,7 +50,7 @@ function Button({ children, ...props }: BitButtonProps) {
     <ShadcnButton
       {...props}
       className={cn(
-        "rounded-none active:translate-y-1 transition-transform relative",
+        "rounded-none active:translate-y-1 transition-transform relative whitespace-normal max-w-full overflow-visible px-2 py-2 sm:px-3",
         font !== "normal" && pressStart.className,
         className
       )}
@@ -62,16 +62,16 @@ function Button({ children, ...props }: BitButtonProps) {
       {variant !== "ghost" && variant !== "link" && size !== "icon" && (
         <>
           {/* Pixelated border */}
-          <div className="absolute -top-1.5 w-1/2 left-1.5 h-1.5 bg-foreground dark:bg-ring" />
-          <div className="absolute -top-1.5 w-1/2 right-1.5 h-1.5 bg-foreground dark:bg-ring" />
-          <div className="absolute -bottom-1.5 w-1/2 left-1.5 h-1.5 bg-foreground dark:bg-ring" />
-          <div className="absolute -bottom-1.5 w-1/2 right-1.5 h-1.5 bg-foreground dark:bg-ring" />
-          <div className="absolute top-0 left-0 size-1.5 bg-foreground dark:bg-ring" />
-          <div className="absolute top-0 right-0 size-1.5 bg-foreground dark:bg-ring" />
+          <div className="absolute -top-1.5 left-1.5 h-1.5 w-[calc(50%-0.375rem)] bg-foreground dark:bg-ring" />
+          <div className="absolute -top-1.5 right-1.5 h-1.5 w-[calc(50%-0.375rem)] bg-foreground dark:bg-ring" />
+          <div className="absolute -bottom-1.5 left-1.5 h-1.5 w-[calc(50%-0.375rem)] bg-foreground dark:bg-ring" />
+          <div className="absolute -bottom-1.5 right-1.5 h-1.5 w-[calc(50%-0.375rem)] bg-foreground dark:bg-ring" />
+          <div className="absolute left-0 top-0 size-1.5 bg-foreground dark:bg-ring" />
+          <div className="absolute right-0 top-0 size-1.5 bg-foreground dark:bg-ring" />
           <div className="absolute bottom-0 left-0 size-1.5 bg-foreground dark:bg-ring" />
           <div className="absolute bottom-0 right-0 size-1.5 bg-foreground dark:bg-ring" />
-          <div className="absolute top-1.5 -left-1.5 h-2/3 w-1.5 bg-foreground dark:bg-ring" />
-          <div className="absolute top-1.5 -right-1.5 h-2/3 w-1.5 bg-foreground dark:bg-ring" />
+          <div className="absolute left-[-0.375rem] top-1.5 h-2/3 w-1.5 bg-foreground dark:bg-ring" />
+          <div className="absolute right-[-0.375rem] top-1.5 h-2/3 w-1.5 bg-foreground dark:bg-ring" />
           {variant !== "outline" && (
             <>
               {/* Top shadow */}

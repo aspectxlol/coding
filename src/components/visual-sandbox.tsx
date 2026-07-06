@@ -28,8 +28,8 @@ export default function VisualSandbox() {
   };
 
   return (
-    <div className="space-y-4">
-      <div className="rounded-none border-4 border-[#232323] bg-[#fffef5] p-4">
+    <div className="w-full min-w-0 space-y-4">
+      <div className="w-full min-w-0 rounded-none border-4 border-[#232323] bg-[#fffef5] p-3 sm:p-4">
         <p className="text-xs uppercase tracking-[0.25em] text-[#172a2b]">Editor kode teks</p>
         <p className="mt-2 text-sm leading-7 text-[#172a2b]">
           Tulis kode lengkapmu sendiri. Coba contoh sederhana: <span className="font-semibold">print(&quot;flag&quot;)</span>
@@ -38,26 +38,26 @@ export default function VisualSandbox() {
         <textarea
           value={code}
           onChange={(event) => setCode(event.target.value)}
-          className="mt-3 min-h-[140px] w-full border-2 border-[#232323] bg-white p-3 font-mono text-sm text-[#172a2b] outline-none"
+          className="mt-3 min-h-[140px] w-full min-w-0 resize-y border-2 border-[#232323] bg-white p-3 font-mono text-sm text-[#172a2b] outline-none"
           spellCheck={false}
         />
 
-        <div className="mt-4 flex flex-wrap gap-3">
-          <Button font="retro" className="bg-cyan-500 text-slate-950" onClick={run}>
+        <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+          <Button font="retro" className="w-full bg-cyan-500 text-slate-950 sm:w-auto" onClick={run}>
             Jalankan kode
           </Button>
-          <Button font="retro" className="bg-fuchsia-500 text-slate-950" onClick={resetCode}>
+          <Button font="retro" className="w-full bg-fuchsia-500 text-slate-950 sm:w-auto" onClick={resetCode}>
             Reset contoh
           </Button>
-          <Button font="retro" className="bg-slate-300 text-[#172a2b]" onClick={clearOutput}>
+          <Button font="retro" className="w-full bg-slate-300 text-[#172a2b] sm:w-auto" onClick={clearOutput}>
             Bersihkan output
           </Button>
         </div>
       </div>
 
-      <div className="rounded-none border-4 border-[#232323] bg-[#0f172a] p-4">
+      <div className="w-full min-w-0 rounded-none border-4 border-[#232323] bg-[#0f172a] p-3 sm:p-4">
         <p className="text-xs uppercase tracking-[0.25em] text-[#bfefff]">Output</p>
-        <pre className="mt-2 min-h-[72px] whitespace-pre-wrap font-mono text-sm text-[#bfefff]">
+        <pre className="mt-2 min-h-[72px] whitespace-pre-wrap break-words font-mono text-sm text-[#bfefff]">
           {output.length === 0 ? '(belum ada output)' : output.join('\n')}
         </pre>
       </div>

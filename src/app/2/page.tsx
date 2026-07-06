@@ -1,122 +1,63 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { useRouter } from 'next/navigation';
+import CodingAdventureFlow from '@/components/coding-adventure-flow';
 import { Button } from '@/components/ui/8bit/button';
-import { Box } from '@/components/ui/8bit/box';
 
-const teachers = [
-  "Mr. Alan Turing",
-  "Ms. Grace Hopper",
-  "Mr. Linus Torvalds",
-  "Ms. Margaret Hamilton",
-  "Mr. Donald Knuth",
-  "Bu Ester", // The fixed winner
-  "Ms. Radia Perlman",
-  "Mr. Tim Berners-Lee",
-  "Ms. Karen Sparck Jones"
-];
-
-const winnerIndex = 5; // Bu Ester
-
-export default function Page() {
-  const [rolling, setRolling] = useState(false);
+export default function StepTwoPage() {
+  const [name, setName] = useState('');
   const [revealed, setRevealed] = useState(false);
-  const [carousel, setCarousel] = useState([...teachers, ...teachers, ...teachers]);
 
-  // Responsive card sizes
-  const cardWidth = 110;
-  const cardHeight = 70;
-  const cardMargin = 4;
-  const visibleCards = 3;
-
-  // The winner should be in the center (index 1 of visible 3)
-  const winnerGlobalIndex = teachers.length * 2 + winnerIndex;
-  const router = useRouter();
-
-  const getTargetX = () => {
-    const centerIndex = Math.floor(visibleCards / 2);
-    return -(winnerGlobalIndex - centerIndex) * (cardWidth + cardMargin * 2);
-  };
-
-  const rollCards = () => {
-    setRolling(true);
-    setRevealed(false);
-
-    setTimeout(() => {
-      setRolling(false);
-      setRevealed(true);
-      setCarousel([teachers[winnerIndex]]);
-    }, 2200);
-
-    setCarousel([...teachers, ...teachers, ...teachers]);
-  };
+  useEffect(() => {
+    const storedName = window.localStorage.getItem('coding-adventure-name') ?? '';
+    setName(storedName);
+  }, []);
 
   return (
-    <div className="flex flex-col items-center mt-8 px-2 w-full">
-      <h1 className="font-bold text-white text-2xl sm:text-4xl md:text-5xl mb-4 sm:mb-6 text-center">Pembina Ekskul</h1>
-      {!revealed ? (
-        <div className="relative w-full max-w-[540px] h-[90px] sm:h-[120px] md:h-[160px] overflow-hidden my-4 sm:my-8">
-          <motion.div
-            key={rolling ? 'rolling' : 'stopped'}
-            initial={{ x: 0 }}
-            animate={{
-              x: rolling ? getTargetX() : 0
-            }}
-            transition={{
-              duration: rolling ? 2 : 0.3,
-              ease: rolling ? [0.22, 1, 0.36, 1] : 'easeOut'
-            }}
-            className="flex items-center absolute left-0 top-0 h-full w-full"
-          >
-            {carousel.map((name, i) => (
-              <Box
-                key={i + name}
-                className="bg-gray-100 border-2 border-gray-300 rounded-xl flex items-center justify-center font-mono text-xs xs:text-sm sm:text-lg md:text-2xl font-semibold shadow-lg mx-1 transition-all duration-200"
-                style={{
-                  width: cardWidth,
-                  height: cardHeight,
-                  minWidth: cardWidth,
-                  minHeight: cardHeight,
-                }}
-              >
-                {name}
-              </Box>
-            ))}
-          </motion.div>
-        </div>
-      ) : (
-        // Final reveal card with pop-out animation
+    <CodingAdventureFlow
+      step={2}
+      title="Teacher Reveal"
+      subtitle="A card game mentor joins the room"
+      description="A shimmering TCG card appears from the neon fog. Esther Rouli, your coding mentor, is ready to guide the next challenge."
+      nextRoute="/3"
+      prevRoute="/1"
+      primaryLabel="Take the quiz"
+    >
+      <motion.div className="space-y-4 rounded-none border border-fuchsia-400/40 bg-slate-900/70 p-4">
+        <p className="text-sm uppercase tracking-[0.25em] text-fuchsia-300">TCG mentor card</p>
         <motion.div
-          initial={{ scale: 0.7, opacity: 0 }}
-          animate={{ scale: 1.1, opacity: 1 }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="w-full max-w-[340px] bg-gray-200 rounded-2xl p-4 sm:p-8 flex flex-col items-center shadow-2xl"
+          className="rounded-none border border-fuchsia-400/60 bg-gradient-to-br from-fuchsia-600/30 to-cyan-600/20 p-4"
+          initial={{ rotateY: 0 }}
+          animate={{ rotateY: revealed ? 360 : 0 }}
+          transition={{ duration: 0.5 }}
         >
-          <img
-              src="/images/bu-ester.jpg"
-            alt="Bu Ester"
-              className="w-[90px] h-[65px] sm:w-[160px] sm:h-[110px] md:w-[200px] md:h-[140px] object-cover object-top rounded-xl bg-white mb-4 sm:mb-6"
-          />
-            <div className="font-bold text-lg sm:text-2xl md:text-3xl mb-4 sm:mb-6 text-black text-center">Bu Ester</div>
-            <Button
-              className="bg-yellow-300 text-black font-bold rounded-lg px-6 py-2 sm:px-8 sm:py-3 text-base sm:text-xl hover:bg-yellow-400 transition"
-              onClick={() => router.push('/3')}
-          >
-            Next
-            </Button>
+          <div className="rounded-none border border-white/20 bg-slate-950/80 p-4 text-slate-100">
+            {revealed ? (
+              <div className="space-y-3 text-sm">
+                <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">Mentor card</p>
+                <h2 className="text-2xl font-black text-white">Esther Rouli</h2>
+                <p className="text-slate-300">Class: Logic Guide • Speciality: Debugging & design</p>
+                <div className="grid grid-cols-3 gap-2 text-center text-xs uppercase">
+                  <div className="border border-cyan-400/40 p-2"><div className="text-cyan-300">Attack</div><div className="text-xl font-black">100</div></div>
+                  <div className="border border-cyan-400/40 p-2"><div className="text-cyan-300">Logic</div><div className="text-xl font-black">100</div></div>
+                  <div className="border border-cyan-400/40 p-2"><div className="text-cyan-300">Speed</div><div className="text-xl font-black">100</div></div>
+                </div>
+                <p className="rounded-none border border-cyan-400/40 bg-cyan-500/10 p-3 text-cyan-100">
+                  “{name || 'Future coder'}, your next challenge is to think like a builder."
+                </p>
+              </div>
+            ) : (
+              <div className="flex min-h-48 items-center justify-center text-center text-sm uppercase tracking-[0.25em] text-cyan-200">
+                Reveal mentor card
+              </div>
+            )}
+          </div>
         </motion.div>
-      )}
-      {!revealed && (
-        <Button
-          onClick={rollCards}
-          disabled={rolling}
-          className="mt-8 px-4 py-2 sm:px-8 sm:py-3 text-base sm:text-2xl font-mono font-bold rounded-xl bg-neutral-800 text-white hover:bg-neutral-700 transition disabled:opacity-60"
-        >
-          {rolling ? 'Rolling...' : 'Roll the Cards!'}
+        <Button font="retro" className="bg-fuchsia-500 text-slate-950" onClick={() => setRevealed(true)}>
+          {revealed ? 'Card revealed' : 'Reveal card'}
         </Button>
-      )}
-    </div>
+      </motion.div>
+    </CodingAdventureFlow>
   );
 }

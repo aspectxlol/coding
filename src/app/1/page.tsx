@@ -1,161 +1,68 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/8bit/dialog';
+import { motion } from 'framer-motion';
+import CodingAdventureFlow from '@/components/coding-adventure-flow';
 import { Button } from '@/components/ui/8bit/button';
 import { Input } from '@/components/ui/8bit/input';
-import AnimatedButton from '@/components/animated/button';
-import Router, { useRouter } from 'next/navigation';
 
-const ROLLING_WORDS = ['Programmer', 'Innovator', 'Problem Solver', 'Creator', 'Learner', 'StackOverflow Visitor',];
-
-function RollingText() {
-  const [index, setIndex] = useState(0);
+export default function StepOnePage() {
+  const [name, setName] = useState('');
+  const [belief, setBelief] = useState('');
+  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % ROLLING_WORDS.length);
-    }, 3000);
-    return () => clearInterval(interval);
+    const savedName = window.localStorage.getItem('coding-adventure-name') ?? '';
+    const savedBelief = window.localStorage.getItem('coding-adventure-belief') ?? '';
+    setName(savedName);
+    setBelief(savedBelief);
+    setSubmitted(Boolean(savedName || savedBelief));
   }, []);
 
-  return (
-    <span
-      style={{
-        display: 'inline-block',
-        position: 'relative',
-        userSelect: 'none',
-        verticalAlign: 'middle',
-        transition: 'width 0.3s',
-      }}
-    >
-      <AnimatePresence mode="wait">
-        <motion.span
-          key={ROLLING_WORDS[index]}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.4 }}
-          style={{
-            display: 'inline-block',
-            textAlign: 'center',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          {ROLLING_WORDS[index]}
-        </motion.span>
-      </AnimatePresence>
-    </span>
-  );
-}
-
-export default function Chapter1() {
-  const [isDialogOpen, setIsDialogOpen] = useState(true);
-  const [playerThoughts, setPlayerThoughts] = useState('');
-  const [showExplanation, setShowExplanation] = useState(false);
-  const router = useRouter();
-
-  const handleThoughtsSubmit = () => {
-    setShowExplanation(true);
-    setIsDialogOpen(false);
+  const handleSubmit = () => {
+    if (!name.trim()) return;
+    window.localStorage.setItem('coding-adventure-name', name.trim());
+    window.localStorage.setItem('coding-adventure-belief', belief.trim());
+    setSubmitted(true);
   };
 
   return (
-    <div className="relative w-full h-screen bg-gray-900 text-white flex flex-col items-center justify-center p-6">
-      {!showExplanation ? (
-        <Dialog
-          modal
-          open={isDialogOpen}
-          onOpenChange={(open) => {
-            setIsDialogOpen(open);
-            if (!open && !showExplanation) {
-              setPlayerThoughts('skipped');
-              setShowExplanation(true);
-            }
-          }}
-        >
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle className={'text-center'}>Kalau denger ‘ngoding’, yang kepikiran pertama apa?</DialogTitle>
-            </DialogHeader>
-            <div className="p-4 gap-2">
-              <Input
-                className="outline-none focus:border-none focus:outline-none"
-                value={playerThoughts}
-                onChange={(e) => setPlayerThoughts(e.target.value)}
-                placeholder="Jawabanmu"
-              />
-              <Button
-                className="px-4 py-2 mt-4 bg-green-500 text-white rounded hover:bg-green-600"
-                onClick={handleThoughtsSubmit}
-                disabled={!playerThoughts}
-              >
-                Submit
-              </Button>
-            </div>
-          </DialogContent>
-        </Dialog>
-      ) : (
-        <>
-          <motion.h1
-            className="text-4xl sm:text-5xl md:text-6xl font-bold text-center mb-6"
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-              Coding
-          </motion.h1>
-
-          <motion.p
-            className="text-lg sm:text-xl md:text-2xl text-center mb-8"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-              style={{ position: 'relative', display: 'inline-block' }}
-          >
-              Coding itu sebuah aktivitas, dimana kita
-              (<RollingText />)
-              memberikan instruksi kepada komputer untuk melakukan sesuatu
-          </motion.p>
-          <AnimatedButton
-            buttonProps={{
-              className:
-                'text-xl sm:text-2xl md:text-3xl h-fit p-4 px-8 font-bold drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)] bg-blue-500 text-white rounded hover:bg-blue-600',
-              variant: 'default',
-              onClick: () => {
-                router.push("/2");
-              },
-            }}
-            motionProps={{
-              initial: 'hidden',
-              animate: 'visible',
-              variants: {
-                hidden: { opacity: 0, y: 50 },
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                  transition: {
-                    delay: 1,
-                    type: 'spring',
-                    stiffness: 100,
-                    damping: 25,
-                  },
-                },
-              },
-              whileHover: { scale: 1.1 },
-              whileTap: { scale: 0.95 },
-            }}
-          >
-            Next
-          </AnimatedButton>
-        </>
-      )}
-    </div>
+    <CodingAdventureFlow
+      step={1}
+      title="First Step"
+      subtitle="What do you think coding is?"
+      description="Tell us your name and your first idea about coding, then we will reveal the real meaning behind it."
+      nextRoute="/2"
+      primaryLabel="Reveal the truth"
+    >
+      <motion.div className="space-y-4 rounded-none border-4 border-[#232323] bg-[#fffef5] p-4">
+        <p className="text-sm uppercase tracking-[0.25em] text-cyan-300">Starter prompt</p>
+        {!submitted ? (
+          <div className="space-y-4">
+            <Input value={name} onChange={(event) => setName(event.target.value)} placeholder="Your name" />
+            <textarea
+              value={belief}
+              onChange={(event) => setBelief(event.target.value)}
+              className="min-h-24 w-full border-2 border-[#232323] bg-white p-3 text-sm text-[#172a2b] outline-none"
+              placeholder="I think coding means..."
+            />
+            <Button font="retro" className="bg-cyan-500 text-slate-950" onClick={handleSubmit}>
+              Submit answer
+            </Button>
+          </div>
+        ) : (
+          <div className="space-y-3 text-sm leading-7 text-slate-200">
+            <p className="text-lg font-semibold text-white">Welcome, {name}.</p>
+            <p>
+              Coding is the art of giving clear instructions to a computer so it can solve problems, create experiences,
+              and build things that people can use.
+            </p>
+            <p className="rounded-none border border-fuchsia-400/40 bg-fuchsia-500/10 p-3 text-fuchsia-100">
+              Your first idea was: “{belief || 'a spark of curiosity'}”. That is already the start of a coder mindset.
+            </p>
+          </div>
+        )}
+      </motion.div>
+    </CodingAdventureFlow>
   );
 }

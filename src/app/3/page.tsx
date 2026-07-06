@@ -1,144 +1,262 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Button } from "@/components/ui/8bit/button"; // shadcn/ui button
-import { cn } from "@/lib/utils"; // shadcn utility for className merge
-import { motion, AnimatePresence } from "framer-motion";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from 'react';
+import CodingAdventureFlow from '@/components/coding-adventure-flow';
+import { Button } from '@/components/ui/8bit/button';
 
-const correct_options = [
-  'MIT AppInventor',
-  'Artificial Intelligence',
-  'Python',
-  'C++'
+const questionBank = [
+  {
+    prompt: 'Which sentence best describes coding?',
+    options: [
+      'It is a set of instructions for a computer.',
+      'It is only for drawing pictures.',
+      'It is a type of music.',
+    ],
+    correctIndex: 0,
+  },
+  {
+    prompt: 'What is one thing code lets you do?',
+    options: [
+      'Tell a computer how to solve problems.',
+      'Make a sandwich automatically.',
+      'Grow plants with music.',
+    ],
+    correctIndex: 0,
+  },
+  {
+    prompt: 'Who uses coding?',
+    options: [
+      'People building websites, apps, and tools.',
+      'Only musicians.',
+      'Only video game players.',
+    ],
+    correctIndex: 0,
+  },
+  {
+    prompt: 'What is a program?',
+    options: [
+      'A set of instructions a computer follows.',
+      'A type of computer screen.',
+      'A computer mouse.',
+    ],
+    correctIndex: 0,
+  },
+  {
+    prompt: 'What is a bug in programming?',
+    options: [
+      'A mistake or error in the code.',
+      'An insect inside the computer.',
+      'A fast computer.',
+    ],
+    correctIndex: 0,
+  },
+  {
+    prompt: 'What does debugging mean?',
+    options: [
+      'Finding and fixing errors in code.',
+      'Deleting your project.',
+      'Making your computer faster.',
+    ],
+    correctIndex: 0,
+  },
+  {
+    prompt: 'Which of these is a programming language?',
+    options: [
+      'JavaScript',
+      'Keyboard',
+      'Monitor',
+    ],
+    correctIndex: 0,
+  },
+  {
+    prompt: 'What does a variable do?',
+    options: [
+      'Stores information that can change.',
+      'Turns off the computer.',
+      'Draws pictures automatically.',
+    ],
+    correctIndex: 0,
+  },
+  {
+    prompt: 'What is an algorithm?',
+    options: [
+      'A step-by-step plan to solve a problem.',
+      'A computer game.',
+      'A type of keyboard.',
+    ],
+    correctIndex: 0,
+  },
+  {
+    prompt: 'What is an "if" statement used for?',
+    options: [
+      'Making decisions in code.',
+      'Playing music.',
+      'Charging a laptop.',
+    ],
+    correctIndex: 0,
+  },
+  {
+    prompt: 'Why do programmers use loops?',
+    options: [
+      'To repeat instructions automatically.',
+      'To make the monitor bigger.',
+      'To connect to Wi-Fi.',
+    ],
+    correctIndex: 0,
+  },
+  {
+    prompt: 'What happens if a program has a syntax error?',
+    options: [
+      'The code cannot run correctly.',
+      'The computer explodes.',
+      'The internet becomes faster.',
+    ],
+    correctIndex: 0,
+  },
+  {
+    prompt: 'What is the purpose of comments in code?',
+    options: [
+      'To explain the code to people.',
+      'To make the program run faster.',
+      'To store passwords.',
+    ],
+    correctIndex: 0,
+  },
+  {
+    prompt: 'Which device can run a program?',
+    options: [
+      'A computer or smartphone.',
+      'A pencil.',
+      'A notebook.',
+    ],
+    correctIndex: 0,
+  },
+  {
+    prompt: 'What is the first thing a computer does?',
+    options: [
+      'Follows the instructions it is given.',
+      'Guesses what you want.',
+      'Writes its own homework.',
+    ],
+    correctIndex: 0,
+  },
+  {
+    prompt: 'What is the goal of coding?',
+    options: [
+      'To create programs that solve problems or perform tasks.',
+      'To make computers heavier.',
+      'To replace keyboards.',
+    ],
+    correctIndex: 0,
+  },
+  {
+    prompt: 'Which skill is important for coding?',
+    options: [
+      'Problem solving.',
+      'Running fast.',
+      'Playing every musical instrument.',
+    ],
+    correctIndex: 0,
+  },
+  {
+    prompt: 'What is an app?',
+    options: [
+      'A program designed to perform specific tasks.',
+      'A computer cable.',
+      'A type of printer.',
+    ],
+    correctIndex: 0,
+  },
+  {
+    prompt: 'Why is testing code important?',
+    options: [
+      'To make sure it works as expected.',
+      'To make the computer louder.',
+      'To change the keyboard color.',
+    ],
+    correctIndex: 0,
+  },
+  {
+    prompt: 'What can coding be used to create?',
+    options: [
+      'Games, websites, apps, and robots.',
+      'Only calculators.',
+      'Only spreadsheets.',
+    ],
+    correctIndex: 0,
+  },
 ];
+export default function StepThreePage() {
+  const [selected, setSelected] = useState<string | null>(null);
+  const [feedback, setFeedback] = useState('Choose the best answer to earn your next badge.');
+  const [question, setQuestion] = useState<{
+    prompt: string;
+    options: string[];
+    correctIndex: number;
+  } | null>(null);
 
-const incorrect_options = [
-  'Bermain Bola',
-  'Memasak Kue',
-  'Berkebun',
-  'Sejarah Dunia',
-  'Seni Lukis',
-  'Matematika Dasar',
-  'Bahasa Jepang',
-  'Filsafat',
-  'Ekonomi Mikro',
-  'Biologi Laut',
-  'Teknik Sipil',
-  'Ilmu Politik'
-];
-
-// 8bit color palette
-const optionColors = [
-  "bg-[#ff595e]", // red
-  "bg-[#ffca3a]", // yellow
-  "bg-[#8ac926]", // green
-  "bg-[#1982c4]", // blue
-  "bg-[#6a4c93]", // purple
-];
-
-// Utility to shuffle array
-function shuffle<T>(array: T[]): T[] {
-  return array
-    .map((value) => ({ value, sort: Math.random() }))
-    .sort((a, b) => a.sort - b.sort)
-    .map(({ value }) => value);
-}
-
-export default function Page() {
-  const router = useRouter();
-  const [questionIdx, setQuestionIdx] = useState(0);
-  const [selected, setSelected] = useState<number | null>(null);
-  const [showResult, setShowResult] = useState(false);
-  const [showCongrats, setShowCongrats] = useState(false);
-  const [optionsData, setOptionsData] = useState<string[] | null>(null);
-
-  // Generate options on mount and when questionIdx changes (client only)
-  React.useEffect(() => {
-    const correct = correct_options[Math.floor(Math.random() * correct_options.length)];
-    const incorrects = shuffle(incorrect_options).slice(0, 3);
-    setOptionsData(shuffle([correct, ...incorrects]));
-    setSelected(null);
-    setShowResult(false);
-    setShowCongrats(false);
-  }, [questionIdx]);
-
-  // Find correct answer for current options
-  const correct = optionsData?.find(opt => correct_options.includes(opt)) ?? "";
-
-  const handleSelect = (idx: number) => {
-    setSelected(idx);
-    setShowResult(true);
-    if (optionsData && optionsData[idx] === correct) {
-      setTimeout(() => setShowCongrats(true), 400); // show animation
-      // Do not auto-advance!
-    } else {
-      setTimeout(() => setQuestionIdx((q) => q + 1), 1200);
+  // Utility: Fisher-Yates shuffle that preserves original indices
+  const shuffleWithIndex = <T,>(arr: T[]) => {
+    const a = arr.map((v, i) => ({ v, i }));
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
     }
+    return a;
+  };
+
+  useEffect(() => {
+    // pick a random question from the bank
+    const idx = Math.floor(Math.random() * questionBank.length);
+    const q = questionBank[idx];
+    // shuffle options but keep track of which is correct
+    const shuffled = shuffleWithIndex(q.options);
+    const options = shuffled.map((s) => s.v);
+    const correctIndex = shuffled.findIndex((s) => s.i === q.correctIndex);
+    setQuestion({ prompt: q.prompt, options, correctIndex });
+    // reset any selected answer/feedback
+    setSelected(null);
+    setFeedback('Choose the best answer to earn your next badge.');
+  }, []);
+
+  const handleCheck = () => {
+    if (!question) return;
+    if (selected === question.options[question.correctIndex]) {
+      setFeedback('Correct! Nice work — that is a great description.');
+      return;
+    }
+    setFeedback('Almost — the best answer is the one that describes coding as instructions for a computer.');
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-neutral-900 relative overflow-hidden">
-      <h1 className="font-8bit text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-8 text-white text-center">
-        Coba tebak apa yang kita bakal pelajarin di ekskul coding?
-      </h1>
-      <div className="grid grid-cols-2 gap-6 w-full max-w-xl">
-        {optionsData &&
-          optionsData.map((opt, i) => (
-            <Button
-              key={opt}
-              onClick={() => !showResult && handleSelect(i)}
-              disabled={showResult}
-              className={cn(
-                "font-8bit w-full text-base sm:text-lg md:text-xl lg:text-2xl py-8 rounded-2xl border-4 border-black shadow-2xl transition-all duration-200 whitespace-normal break-words",
-                optionColors[i % optionColors.length],
-                selected === i && (opt === correct
-                  ? "ring-4 ring-green-400 scale-105"
-                  : "ring-4 ring-red-400 scale-95"),
-                "hover:scale-105"
-              )}
+    <CodingAdventureFlow
+      step={3}
+      title="Quick Quiz"
+      subtitle="Guess the right idea"
+      description="Esther challenges you with a tiny multiple-choice puzzle to test how coding is understood."
+      nextRoute="/4"
+      prevRoute="/2"
+      primaryLabel="Enter the demo"
+    >
+      <div className="space-y-4 rounded-none border border-cyan-400/40 bg-slate-900/70 p-4">
+        <p className="text-sm uppercase tracking-[0.25em] text-cyan-300">Question</p>
+        <p className="text-lg font-semibold text-white">{question ? question.prompt : 'Loading question...'}</p>
+        <div className="space-y-2">
+          {question && question.options.map((option) => (
+            <button
+              key={option}
+              onClick={() => setSelected(option)}
+              className={`w-full rounded-none border p-3 text-left text-sm transition ${selected === option ? 'border-cyan-300 bg-cyan-500/20 text-cyan-100' : 'border-slate-700 bg-slate-950/70 text-slate-200'}`}
             >
-              {opt}
-            </Button>
+              {option}
+            </button>
           ))}
-      </div>
-      {/* Correct answer animation */}
-      <AnimatePresence>
-        {showCongrats && (
-          <motion.div
-            initial={{ y: 400, opacity: 0, scale: 0.7 }}
-            animate={{ y: 0, opacity: 1, scale: 1 }}
-            exit={{ y: -200, opacity: 0, scale: 0.7 }}
-            transition={{ type: "spring", stiffness: 200, damping: 18 }}
-            className="fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 bg-white rounded-2xl shadow-2xl px-8 py-10 flex flex-col items-center"
-          >
-            <div className="font-8bit text-2xl md:text-3xl text-black mb-4 text-center">
-              kita bakal belajar
-            </div>
-            <ul className="space-y-2 mt-2 mb-6">
-              {correct_options.map((item) => (
-                <li
-                  key={item}
-                  className="font-8bit text-lg md:text-xl text-center text-neutral-800 bg-yellow-100 rounded-lg px-4 py-2"
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <Button
-              className="bg-yellow-300 text-black font-8bit font-bold rounded-lg px-8 py-3 text-xl hover:bg-yellow-400 transition"
-              onClick={() => router.push("/4")}
-            >
-              Next
-            </Button>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      {showResult && !showCongrats && (
-        <div className="mt-8 font-8bit text-xl sm:text-2xl md:text-3xl text-white">
-          {optionsData && optionsData[selected!] === correct ? "Benar! 🎉" : "Salah! 😅"}
         </div>
-      )}
-    </div>
+        <Button font="retro" className="bg-cyan-500 text-slate-950" onClick={handleCheck}>
+          Check answer
+        </Button>
+        <p className="text-sm leading-7 text-slate-300">{feedback}</p>
+      </div>
+    </CodingAdventureFlow>
   );
 }

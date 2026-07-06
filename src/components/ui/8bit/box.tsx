@@ -8,6 +8,9 @@ export const Box: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, 
       borderRadius: 16,
       padding: 16,
       boxShadow: '4px 4px 0 #888',
+      boxSizing: 'border-box',
+      overflow: 'hidden',
+      textAlign: 'center',
       ...style,
     }}
     {...props}

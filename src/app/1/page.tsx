@@ -36,7 +36,7 @@ export default function StepOnePage() {
         step={1}
         title="Langkah Pertama"
         subtitle="Menurutmu, coding itu apa sih?"
-        description="Ceritakan namamu dan pendapatmu soal coding dulu, lalu kita bakal buka arti sebenarnya yang ternyata jauh lebih santai."
+        description="isi namamu dan pendapatmu soal coding dulu, lalu kita bakal buka arti sebenarnya yang ternyata jauh lebih santai."
         nextRoute="/2"
         primaryLabel="Buka kebenarannya"
         onPrimaryAction={() => setIsTruthOpen(true)}

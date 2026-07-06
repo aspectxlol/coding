@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import CodingAdventureFlow from '@/components/coding-adventure-flow';
 import { Button } from '@/components/ui/8bit/button';
 
@@ -179,6 +180,9 @@ export default function StepThreePage() {
     options: string[];
     correctIndex: number;
   } | null>(null);
+  const [showAnswerReveal, setShowAnswerReveal] = useState(false);
+  const [celebrateCorrect, setCelebrateCorrect] = useState(false);
+  const [correctOption, setCorrectOption] = useState<string | null>(null);
 
   const shuffleWithIndex = <T,>(arr: T[]) => {
     const a = arr.map((v, i) => ({ v, i }));
@@ -198,15 +202,29 @@ export default function StepThreePage() {
     setQuestion({ prompt: q.prompt, options, correctIndex });
     setSelected(null);
     setFeedback('Pilih jawaban terbaik untuk meraih lencana berikutnya.');
+    setShowAnswerReveal(false);
+    setCelebrateCorrect(false);
+    setCorrectOption(null);
   }, []);
 
   const handleCheck = () => {
     if (!question) return;
-    if (selected === question.options[question.correctIndex]) {
+
+    const answer = question.options[question.correctIndex];
+    const isCorrect = selected === answer;
+
+    setCorrectOption(answer);
+    setShowAnswerReveal(true);
+
+    if (isCorrect) {
       setFeedback('Betul! Nice, itu jawaban yang tepat.');
+      setCelebrateCorrect(true);
+      window.setTimeout(() => setCelebrateCorrect(false), 900);
       return;
     }
+
     setFeedback('Hampir — jawaban terbaik adalah yang menggambarkan coding sebagai instruksi untuk komputer.');
+    setCelebrateCorrect(false);
   };
 
   return (
@@ -223,15 +241,33 @@ export default function StepThreePage() {
         <p className="text-sm uppercase tracking-[0.25em] text-cyan-300">Pertanyaan</p>
         <p className="text-lg font-semibold text-white">{question ? question.prompt : 'Nunggu pertanyaannya dulu ya...'}</p>
         <div className="space-y-2">
-          {question && question.options.map((option) => (
-            <button
-              key={option}
-              onClick={() => setSelected(option)}
-              className={`w-full rounded-none border p-3 text-left text-sm transition ${selected === option ? 'border-cyan-300 bg-cyan-500/20 text-cyan-100' : 'border-slate-700 bg-slate-950/70 text-slate-200'}`}
-            >
-              {option}
-            </button>
-          ))}
+          {question && question.options.map((option) => {
+            const isCorrectOption = showAnswerReveal && option === correctOption;
+            const isSelectedWrong = showAnswerReveal && selected === option && option !== correctOption;
+
+            return (
+              <div key={option} className="relative">
+                <button
+                  onClick={() => setSelected(option)}
+                  className={`w-full rounded-none border p-3 text-left text-sm transition ${selected === option ? 'border-cyan-300 bg-cyan-500/20 text-cyan-100' : 'border-slate-700 bg-slate-950/70 text-slate-200'} ${isCorrectOption ? 'border-emerald-300 bg-emerald-500/20 text-emerald-100 shadow-[0_0_0_2px_rgba(74,222,128,0.25)]' : ''} ${isSelectedWrong ? 'border-rose-400 bg-rose-500/10 text-rose-100' : ''}`}
+                >
+                  {option}
+                </button>
+                {isCorrectOption && celebrateCorrect && (
+                  <motion.div
+                    className="pointer-events-none absolute -top-3 right-3 flex gap-1"
+                    initial={{ opacity: 0, y: 0 }}
+                    animate={{ opacity: [0, 1, 0], y: [0, -10, -18], rotate: [0, 8, -8] }}
+                    transition={{ duration: 0.9 }}
+                  >
+                    <span className="text-sm">✨</span>
+                    <span className="text-sm">🎉</span>
+                    <span className="text-sm">⭐</span>
+                  </motion.div>
+                )}
+              </div>
+            );
+          })}
         </div>
         <Button font="retro" className="bg-cyan-500 text-slate-950" onClick={handleCheck}>
           Cek jawaban

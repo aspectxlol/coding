@@ -14,6 +14,8 @@ type QuestFlowProps = {
   prevRoute?: string;
   primaryLabel: string;
   secondaryLabel?: string;
+  onPrimaryAction?: () => void;
+  onSecondaryAction?: () => void;
   children: ReactNode;
 };
 
@@ -26,9 +28,14 @@ export default function CodingAdventureFlow({
   prevRoute,
   primaryLabel,
   secondaryLabel,
+  onPrimaryAction,
+  onSecondaryAction,
   children,
 }: QuestFlowProps) {
   const router = useRouter();
+
+  const handlePrimaryAction = onPrimaryAction ?? (() => router.push(nextRoute));
+  const handleSecondaryAction = onSecondaryAction ?? (() => router.push('/1'));
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -94,11 +101,11 @@ export default function CodingAdventureFlow({
                   Back
                 </Button>
               )}
-              <Button font="retro" className="border-2 border-[#232323] bg-[#006d77] text-white" onClick={() => router.push(nextRoute)}>
+              <Button font="retro" className="border-2 border-[#232323] bg-[#006d77] text-white" onClick={handlePrimaryAction}>
                 {primaryLabel}
               </Button>
               {secondaryLabel && (
-                <Button font="retro" variant="outline" className="border-2 border-[#232323] bg-[#fffef8] text-[#232323]" onClick={() => router.push('/1')}>
+                <Button font="retro" variant="outline" className="border-2 border-[#232323] bg-[#fffef8] text-[#232323]" onClick={handleSecondaryAction}>
                   {secondaryLabel}
                 </Button>
               )}

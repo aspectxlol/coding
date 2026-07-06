@@ -60,9 +60,6 @@ export default function CodingAdventureFlow({
           >
             <div className="flex items-center justify-between">
               <p className="text-sm uppercase tracking-[0.25em] text-[#1e90ff]">Ringkasan petualangan</p>
-              <div className="border-2 border-[#232323] bg-[#f6f6f6] px-2 py-1 text-xs uppercase tracking-[0.2em] text-[#232323]">
-                Demo langsung
-              </div>
             </div>
 
             <div className="space-y-3 text-sm leading-7 text-[#172a2b]">

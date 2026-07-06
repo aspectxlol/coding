@@ -16,9 +16,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="id">
       <head />
-      <body className={`bg-gray-900 font-mono ${pressStart.className}`}>
+      <body className={`overflow-x-hidden bg-gray-900 font-mono ${pressStart.className}`}>
         <Navbar />
-        <main className='min-h-screen flex flex-col justify-center'>
+        <main className='flex min-h-screen flex-col justify-center'>
           {children}
         </main>
       </body>

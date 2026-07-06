@@ -1,6 +1,6 @@
 "use client";
 
-import { type ReactNode, useEffect } from "react";
+import { type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/8bit/button";
@@ -37,46 +37,31 @@ export default function CodingAdventureFlow({
   const handlePrimaryAction = onPrimaryAction ?? (() => router.push(nextRoute));
   const handleSecondaryAction = onSecondaryAction ?? (() => router.push('/1'));
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key >= "1" && event.key <= "7") {
-        const target = Number(event.key);
-        if (target !== step) {
-          router.push(`/${target}`);
-        }
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [router, step]);
-
   return (
-    <div className="min-h-screen bg-[#f0f6ef] px-4 py-8 text-[#172a2b] sm:px-6 lg:px-8">
+    <div className="flex min-h-screen items-center justify-center bg-[#f0f6ef] px-3 py-4 text-[#172a2b] sm:px-6 sm:py-8 lg:px-8">
       <motion.div
-        className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-6xl flex-col justify-center border-4 border-[#232323] bg-[#fffef8] p-6 shadow-[12px_12px_0_#232323] sm:p-8 lg:p-10"
+        className="mx-auto flex w-full max-w-6xl flex-col justify-center border-4 border-[#232323] bg-[#fffef8] p-4 shadow-[8px_8px_0_#232323] sm:p-8 sm:shadow-[12px_12px_0_#232323] lg:p-10"
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.35, ease: "easeOut" }}
       >
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3 text-[10px] uppercase tracking-[0.35em] text-[#1e90ff] sm:text-xs">
-          <span>Quest {step}/7</span>
-          <span>Press 1-7 to jump</span>
+          <span>Misi {step}/7</span>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
-          <div className="space-y-6">{children}</div>
+        <div className="grid gap-4 sm:gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
+          <div className="space-y-4 sm:space-y-6">{children}</div>
 
           <motion.div
-            className="space-y-4 border-4 border-[#232323] bg-[#fffef8] p-5 shadow-[8px_8px_0_#232323]"
+            className="space-y-3 border-4 border-[#232323] bg-[#fffef8] p-4 shadow-[6px_6px_0_#232323] sm:space-y-4 sm:p-5 sm:shadow-[8px_8px_0_#232323]"
             initial={{ opacity: 0, x: 18 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.16 }}
           >
             <div className="flex items-center justify-between">
-              <p className="text-sm uppercase tracking-[0.25em] text-[#1e90ff]">Adventure brief</p>
+              <p className="text-sm uppercase tracking-[0.25em] text-[#1e90ff]">Ringkasan petualangan</p>
               <div className="border-2 border-[#232323] bg-[#f6f6f6] px-2 py-1 text-xs uppercase tracking-[0.2em] text-[#232323]">
-                Live demo
+                Demo langsung
               </div>
             </div>
 
@@ -98,7 +83,7 @@ export default function CodingAdventureFlow({
             <div className="flex flex-wrap gap-3 pt-2">
               {prevRoute && (
                 <Button font="retro" variant="outline" className="border-2 border-[#232323] bg-[#fffef8] text-[#232323]" onClick={() => router.push(prevRoute)}>
-                  Back
+                  Kembali
                 </Button>
               )}
               <Button font="retro" className="border-2 border-[#232323] bg-[#006d77] text-white" onClick={handlePrimaryAction}>

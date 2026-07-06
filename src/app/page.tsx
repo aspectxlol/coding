@@ -50,15 +50,15 @@ export default function Home() {
         variants={containerVariants}
       >
         <motion.div className="border-4 border-[#232323] bg-[#ff8fb1] px-6 py-5 shadow-[12px_12px_0_#232323] sm:px-8" variants={itemVariants}>
-          <p className="text-center text-xs uppercase tracking-[0.35em] text-[#fffef8]">Retro Game Demo</p>
+          <p className="text-center text-xs uppercase tracking-[0.35em] text-[#fffef8]">Demo Game Retro</p>
           <h1 className="mt-2 text-center text-5xl font-black uppercase tracking-[0.2em] text-[#fffef8] sm:text-6xl md:text-7xl lg:text-8xl">
-            Coding Adventure
+            Petualangan Coding
           </h1>
         </motion.div>
 
         <motion.div className="max-w-2xl border-4 border-[#232323] bg-[#fffef8] p-4 shadow-[12px_12px_0_#232323]" variants={itemVariants}>
           <p className="text-center text-base text-[#172a2b] sm:text-lg md:text-2xl">
-            Start the story, meet Esther Rouli, and unlock your first coding badge in a bright retro quest.
+            Mulai ceritanya, temui Esther Rouli, dan buka lencana coding pertamamu dalam misi retro yang cerah.
           </p>
         </motion.div>
 
@@ -83,7 +83,7 @@ export default function Home() {
             whileTap: { scale: 0.95 },
           }}
         >
-          Begin Adventure
+          Mulai Petualangan
         </AnimatedButton>
       </motion.div>
     </div>

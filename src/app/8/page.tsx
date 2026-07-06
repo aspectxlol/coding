@@ -4,15 +4,15 @@ export default function StepEightPage() {
   return (
     <CodingAdventureFlow
       step={8}
-      title="Finale"
-      subtitle="Quest complete"
-      description="The adventure closes with a burst of light. Your coding journey is only beginning, but this run proves that you can learn, build, and keep going."
+      title="Penutup"
+      subtitle="Misi selesai"
+      description="Petualangan ini ditutup dengan kilatan cahaya. Perjalanan codingmu baru saja dimulai, namun lintasan ini membuktikan bahwa kamu bisa belajar, membangun, dan terus maju."
       nextRoute="/"
       prevRoute="/7"
-      primaryLabel="Play again"
+      primaryLabel="Main lagi"
     >
       <div className="rounded-none border border-cyan-400/40 bg-slate-900/70 p-4 text-sm leading-7 text-slate-300">
-        You completed the full adventure and earned your first spark of coding confidence.
+        Kamu menyelesaikan seluruh petualangan dan meraih percikan pertama rasa percaya diri dalam coding.
       </div>
     </CodingAdventureFlow>
   );

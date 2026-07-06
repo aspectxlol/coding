@@ -9,12 +9,12 @@ const pressStart = Press_Start_2P({
 
 export const metadata = {
   title: "Coding",
-  description: "Tempat mengubah imajinasi, Menjadi kenyataan"
+  description: "Tempat mengubah imajinasi menjadi kenyataan"
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="id">
       <head />
       <body className={`bg-gray-900 font-mono ${pressStart.className}`}>
         <Navbar />
